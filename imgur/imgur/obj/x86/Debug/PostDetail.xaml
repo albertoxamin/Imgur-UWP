@@ -1,0 +1,20 @@
+﻿<Page
+    x:Class="imgur.PostDetail"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:imgur"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid>
+        <FlipView x:ConnectionId='1' VirtualizingStackPanel.VirtualizationMode="Standard" x:Name="flipView"                                             >
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <local:ImageImgurXAML DataContext="{Binding}"/>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
+        <ProgressRing x:ConnectionId='2' x:Name="progressRing"/>
+    </Grid>
+</Page>
+
