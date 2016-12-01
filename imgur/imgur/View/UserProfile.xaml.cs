@@ -1,4 +1,4 @@
-﻿using imgur.ImgurAPI;
+﻿using Imgur.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace imgur
+namespace Imgur
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -30,11 +30,11 @@ namespace imgur
         }
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            var account = (e.Parameter as ImgurAPI.ImgurAccount.Account);
+            var account = (e.Parameter as ImgurAccount.Account);
             DataContext = account;
             if (e.NavigationMode != NavigationMode.Back)
             {
-                ImgurAPI.ImgurAccount.AccountAwards aw = await App.ServiceClient.GetGalleryProfile(account.url);
+                ImgurAccount.AccountAwards aw = await App.ServiceClient.GetGalleryProfile(account.url);
                 repResume.Text += " • " + aw.trophies.Count() + ((aw.trophies.Count() != 1) ? " Trophies" : "Trophy");
 
                 List<Comment> userCom = await App.ServiceClient.GetAccountComments(account.url);

@@ -1,4 +1,4 @@
-﻿using imgur.ImgurAPI;
+﻿using Imgur.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace imgur
+namespace Imgur
 {
     public sealed partial class CommentControl : UserControl
     {
@@ -70,7 +70,7 @@ namespace imgur
         private async void OpenLink(Hyperlink sender, HyperlinkClickEventArgs args)
         {
             try {
-                (DataContext as Comment).mainPage.OpenLink(link);
+                //(DataContext as Comment).mainPage.OpenLink(link);
             }
             catch { }
         }

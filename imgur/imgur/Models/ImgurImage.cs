@@ -16,7 +16,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Networking.Connectivity;
 
-namespace imgur.ImgurAPI
+namespace Imgur.Models
 {
     public class ImgurGalleryData
     {

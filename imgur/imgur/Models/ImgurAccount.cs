@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace imgur.ImgurAPI
+namespace Imgur.Models
 {
     public class ImgurAccount
     {

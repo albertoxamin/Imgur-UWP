@@ -1,4 +1,4 @@
-﻿using imgur.ImgurAPI;
+﻿using Imgur.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,7 +24,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace imgur
+namespace Imgur
 {
     public sealed partial class ImageImgurXAML : UserControl
     {
@@ -41,16 +41,16 @@ namespace imgur
             loaded = true;
             //this.FindName("immagini");
             this.FindName("immaginiList");
-            (DataContext as ImgurAPI.ImgurImage).description = System.Net.WebUtility.HtmlDecode((DataContext as ImgurAPI.ImgurImage).description);
-            //if ((DataContext as ImgurAPI.ImgurImage).AccountUrl.Length > 15)
-            //    accountID.Text = (DataContext as ImgurAPI.ImgurImage).AccountUrl.Substring(0, 24) + "...";
+            (DataContext as ImgurImage).description = System.Net.WebUtility.HtmlDecode((DataContext as ImgurImage).description);
+            //if ((DataContext as ImgurImage).AccountUrl.Length > 15)
+            //    accountID.Text = (DataContext as ImgurImage).AccountUrl.Substring(0, 24) + "...";
             //scrollableArea.Margin = new Thickness(0, topPart.ActualHeight-60, 0, 60);
             await LoadComments();
         }
 
         async Task LoadComments()
         {
-            List<Comment> iid = await App.ServiceClient.GetComments(((DataContext as ImgurImage).IsAlbum)?"album": "gallery", (DataContext as ImgurAPI.ImgurImage).ID);
+            List<Comment> iid = await App.ServiceClient.GetComments(((DataContext as ImgurImage).IsAlbum)?"album": "gallery", (DataContext as ImgurImage).ID);
             try
             {
                 foreach (Comment c in iid)
@@ -80,9 +80,9 @@ namespace imgur
 
         private async void immaginiList_Loaded(object sender, RoutedEventArgs e)
         {
-            if ((DataContext as ImgurAPI.ImgurImage).IsAlbum)
+            if ((DataContext as ImgurImage).IsAlbum)
             {
-                List<AlbumImage> iid = await App.ServiceClient.GetAlbumImages((DataContext as ImgurAPI.ImgurImage).ID);
+                List<AlbumImage> iid = await App.ServiceClient.GetAlbumImages((DataContext as ImgurImage).ID);
                 foreach (AlbumImage ii in iid)
                 {
                     ii.description = System.Net.WebUtility.HtmlDecode(ii.description);
@@ -95,7 +95,7 @@ namespace imgur
         {
             if (loaded)
                 return;
-            System.Diagnostics.Debug.WriteLine((DataContext as ImgurAPI.ImgurImage).ID);
+            System.Diagnostics.Debug.WriteLine((DataContext as ImgurImage).ID);
             Load();
         }
         private void MediaElement_Tapped(object sender, TappedRoutedEventArgs e)
@@ -169,7 +169,7 @@ namespace imgur
         }
         void CheckIfHasToShowScrollToTopButton()
         {
-            if (scrollViewer.VerticalOffset > 400 && (DataContext as ImgurAPI.ImgurImage).IsAlbum)
+            if (scrollViewer.VerticalOffset > 400 && (DataContext as ImgurImage).IsAlbum)
             {
                 scrollToTopButton.Visibility = Visibility.Visible;
                 scrollToTopButton.Opacity = scrollViewer.VerticalOffset/2400d;
@@ -190,10 +190,10 @@ namespace imgur
 
         private async void accountID_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            (DataContext as ImgurImage).mainPage.SetBusy(true);
+            //(DataContext as ImgurImage).mainPage.SetBusy(true);
             ImgurAccount.Account op = await App.ServiceClient.GetAccount((DataContext as ImgurImage).AccountUrl);
             (DataContext as ImgurImage).Frame.Navigate(typeof(UserProfile), op);
-            (DataContext as ImgurImage).mainPage.SetBusy(false);
+            //(DataContext as ImgurImage).mainPage.SetBusy(false);
         }
 
         private void UpvoteDoubleTap(object sender, DoubleTappedRoutedEventArgs e)

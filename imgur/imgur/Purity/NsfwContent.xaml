@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="imgur.Purity.NsfwContent"
+    x:Class="Imgur.Purity.NsfwContent"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:imgur.Purity"
+    xmlns:local="using:Imgur.Purity"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">

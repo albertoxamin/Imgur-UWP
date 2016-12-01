@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Windows.UI.Xaml;
 
-namespace imgur.ImgurAPI
+namespace Imgur.Models
 {
     public class ImgurImageData
     {

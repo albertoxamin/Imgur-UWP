@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace imgur
+namespace Imgur.Controls
 {
     public class MyGridView : GridView
     {

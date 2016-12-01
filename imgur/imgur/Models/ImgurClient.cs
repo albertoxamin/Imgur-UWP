@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 
-namespace imgur.ImgurAPI
+namespace Imgur.Models
 {
     public class ImgurClient
     {
@@ -48,7 +48,7 @@ namespace imgur.ImgurAPI
                 Method = HttpMethod.Get,
             };
             request.Headers.Add("Authorization", "Client-ID " + _clientID);
-            ImgurAPI.ImgurImageData iid = null;
+            ImgurImageData iid = null;
             var task = await client.SendAsync(request).ContinueWith(
                 async (s) =>
                 {
@@ -129,7 +129,7 @@ namespace imgur.ImgurAPI
                 Method = HttpMethod.Get,
             };
             request.Headers.Add("Authorization", "Client-ID " + _clientID);
-            ImgurAPI.ImgurAccount.Account ia = null;
+            ImgurAccount.Account ia = null;
             var task = await client.SendAsync(request).ContinueWith(
                 async (s) =>
                 {
@@ -181,7 +181,7 @@ namespace imgur.ImgurAPI
                 Method = HttpMethod.Get,
             };
             request.Headers.Add("Authorization", "Client-ID " + _clientID);
-            ImgurAPI.ImgurAccount.AccountAwards ia = null;
+            ImgurAccount.AccountAwards ia = null;
             var task = await client.SendAsync(request).ContinueWith(
                 async (s) =>
                 {

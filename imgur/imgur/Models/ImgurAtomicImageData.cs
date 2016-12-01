@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace imgur.ImgurAPI
+namespace Imgur.Models
 {
     public class ImgurAtomicImageData
     {
