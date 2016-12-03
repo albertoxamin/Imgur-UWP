@@ -1,4 +1,5 @@
-﻿using Imgur.Models;
+﻿using imgur.Services;
+using Imgur.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,6 +43,8 @@ namespace Imgur
         }
         public static ImgurClient ServiceClient = new ImgurClient(ConstantContainer.IMGUR_CLIENT_ID,
             ConstantContainer.IMGUR_CLIENT_SECRET);
+
+        public static IPostsDataService postsDataService = new LocalPostDataService();
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.

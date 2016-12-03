@@ -107,6 +107,9 @@
       <DependentUpon>TabHeaderFill.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <Compile Include="Services\IPostsDataService.cs" />
+    <Compile Include="Services\LocalPostDataService.cs" />
+    <Compile Include="ViewModels\MainListViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="View\ImageImgurXAML.xaml.cs">
       <DependentUpon>ImageImgurXAML.xaml</DependentUpon>
@@ -257,9 +260,7 @@
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

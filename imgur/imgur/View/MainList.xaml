@@ -6,7 +6,8 @@
     xmlns:controls="using:Imgur.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContext="{Binding Source={StaticResource viewModelLocator}, Path=MainListViewModel}">
     <Page.Resources>
         <Storyboard x:Name="ShowTopics">
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="topicContainer">
@@ -72,7 +73,10 @@
         <Grid.Clip>
             <RectangleGeometry Rect="0,0,6666,6666"/>
         </Grid.Clip>
-        <controls:MyGridView x:Name="mailList" SelectionChanged="mailList_SelectionChanged" SizeChanged="mailList_SizeChanged" Margin="5,0,0,0" RenderTransformOrigin="0.5,0.5">
+        <controls:MyGridView
+            Margin="5,0,0,0"
+            ItemsSource="{Binding Posts}"
+            RenderTransformOrigin="0.5,0.5">
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VariableSizedWrapGrid Orientation="Horizontal" ItemHeight="20" ItemWidth="160"/>
@@ -120,10 +124,12 @@
             <Grid.RenderTransform>
                 <CompositeTransform/>
             </Grid.RenderTransform>
-            <GridView SelectionMode="None" x:Name="topicGrid" Margin="5,0,0,0" SizeChanged="topicGrid_SizeChanged">
+            <GridView SelectionMode="None" x:Name="topicGrid" Margin="5,0,0,0"
+                      >
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Tag="{Binding index}" Padding="2" MinHeight="100" MinWidth="100" MaxHeight="200" MaxWidth="200" Tapped="Grid_Tapped" Background="#00000000">
+                        <Grid Tag="{Binding index}" Padding="2" MinHeight="100" MinWidth="100" MaxHeight="200" MaxWidth="200"
+                               Background="#00000000">
                             <Grid IsHitTestVisible="False" Background="#FF222222"/>
                             <Image IsHitTestVisible="False" DataContext="{Binding Path=topPost}" Source="{Binding Path=thumbnail}" Opacity="0.3" Stretch="UniformToFill"/>
                             <Grid IsHitTestVisible="False" Visibility="{Binding selected}" Background="#FF3BAA42" Opacity="0.8"/>

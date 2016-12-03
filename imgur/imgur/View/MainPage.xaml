@@ -129,25 +129,27 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <Grid Background="#FF2B2B2B">
-            <Frame x:Name="frame" Margin="0,60,0,0"/>
+            <Frame x:Name="frame" Content="{Binding CurrentPage}" Margin="{Binding PageMargin}"/>
             <Grid Height="60" VerticalAlignment="Top">
-                <Grid Background="#33000000" x:Name="mainListCommands" Visibility="Collapsed">
-                    <Button 
+                <Grid Background="#33000000" x:Name="mainListCommands"
+                      Visibility="{Binding MainListCommandsVisibility}">
+                    <ComboBox 
                         x:Name="categoryButton" 
                         HorizontalAlignment="Left"
                         VerticalAlignment="Stretch"
                         Background="{x:Null}"
                         Foreground="White"
+                        SelectedItem="{Binding CurrentSection}"
                         Margin="10,0,0,0" Padding="8,4,20,4">
                         <StackPanel Orientation="Horizontal" BorderThickness="0,0,40,0">
                             <TextBlock Text="Most Viral" FontSize="16"/>
                             <FontIcon Glyph="&#xE011;" FontSize="14" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
-                    </Button>
+                    </ComboBox>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                         <ListBoxItem Padding="0">
                             <Button Background="{x:Null}" Padding="12,0" Height="60">
-                                <Image Source="Assets/ic_action_search.png" Width="25"/>
+                                <Image Source="ms-appx:///Assets/ic_action_search.png" Width="25"/>
                             </Button>
                         </ListBoxItem>
                         <ListBoxItem Padding="0">
@@ -158,12 +160,14 @@
                                         <MenuFlyoutItem Tag="1" Text="Newest" />
                                     </MenuFlyout>
                                 </Button.Flyout>
-                                <Image Source="Assets/ic_sort_white_24dp.png" Width="25"/>
+                                <Image Source="ms-appx:///Assets/ic_sort_white_24dp.png" Width="25"/>
                             </Button>
                         </ListBoxItem>
                     </StackPanel>
                 </Grid>
-                <Grid x:Name="postDetailCommands" Margin="0,0,0,0" Visibility="Collapsed">
+                <Grid x:Name="postDetailCommands"
+                     Visibility="{Binding PostDetailCommandsVisibility}"
+                     Margin="0,0,0,0">
                     <Button Background="#00000000" Padding="12,0" Height="60" Width="60">
                         <SymbolIcon Foreground="#FFBBBBBB" Symbol="Back"/>
                     </Button>

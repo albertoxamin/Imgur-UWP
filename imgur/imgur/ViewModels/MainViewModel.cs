@@ -8,61 +8,59 @@ using Imgur.Models;
 using GalaSoft.MvvmLight.Command;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace Imgur.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private ImgurGallerySection currentSection = ImgurGallerySection.Hot;
-        private ImgurGallerySort currentSort = ImgurGallerySort.Viral;
+        private ImgurGallerySection _currentSection = ImgurGallerySection.Hot;
+        private ImgurGallerySort _currentSort = ImgurGallerySort.Viral;
 
         public ImgurGallerySection CurrentSection
         {
-            get { return currentSection; }
+            get { return _currentSection; }
             set
             {
-                currentSection = value;
+                _currentSection = value;
                 RaisePropertyChanged();
             }
         }
 
         public ImgurGallerySort CurrentSort
         {
-            get { return currentSort; }
+            get
+            {
+                return _currentSort;
+            }
             set
             {
-                currentSort = value;
+                _currentSort = value;
                 RaisePropertyChanged();
             }
         }
 
-        private bool isBusy;
+        private bool _isBusy;
 
         public bool IsBusy
         {
-            get { return isBusy; }
+            get { return _isBusy; }
             set
             {
-                isBusy = value;
+                _isBusy = value;
                 RaisePropertyChanged();
             }
         }
 
         #region Sharing
-        private RelayCommand shareCommand;
-        public RelayCommand ShareCommand
-        {
-            get
-            {
-                return shareCommand ?? (shareCommand = new RelayCommand(ExecuteShareCommand));
-            }
-        }
+        private RelayCommand _shareCommand;
+        public RelayCommand ShareCommand => _shareCommand ?? (_shareCommand = new RelayCommand(ExecuteShareCommand));
 
         private void ExecuteShareCommand()
         {
             DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
             dataTransferManager.DataRequested += DataTransferManager_DataRequested;
-            Windows.ApplicationModel.DataTransfer.DataTransferManager.ShowShareUI();
+            DataTransferManager.ShowShareUI();
         }
 
         private void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
@@ -74,31 +72,84 @@ namespace Imgur.ViewModels
         }
         #endregion
 
-        #region Navigation
+        private Thickness _pageMargin;
 
-        private Page currentPage;
-        public Page CurrentPage
+        public Thickness PageMargin
         {
-            get
-            {
-                return currentPage;
-            }
-
+            get { return _pageMargin; }
             set
             {
-                currentPage = value;
+                _pageMargin = value;
                 RaisePropertyChanged();
             }
         }
 
-        private RelayCommand backCommand;
-        public RelayCommand BackCommand
+        private Visibility _mainListCommandsVisibility = Visibility.Collapsed;
+        public Visibility MainListCommandsVisibility
         {
             get
             {
-                return backCommand ?? (backCommand = new RelayCommand(ExecuteBackCommand));
+                return _mainListCommandsVisibility;
+            }
+            set
+            {
+                _mainListCommandsVisibility = value;
+                RaisePropertyChanged();
             }
         }
+
+        private Visibility _postDetailCommandsVisibility = Visibility.Collapsed;
+        public Visibility PostDetailCommandsVisibility
+        {
+            get
+            {
+                return _postDetailCommandsVisibility;
+            }
+            set
+            {
+                _postDetailCommandsVisibility = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #region Navigation
+        private Page _currentPage;
+        public Page CurrentPage
+        {
+            get
+            {
+                return _currentPage;
+            }
+            set
+            {
+                _currentPage = value;
+                MainListCommandsVisibility = Visibility.Collapsed;
+                PostDetailCommandsVisibility = Visibility.Collapsed;
+                var pageType = _currentPage.GetType();
+                if (pageType == typeof(MainList))
+                {
+                    PageMargin = new Thickness(0, 60, 0, 0);
+                    MainListCommandsVisibility = Visibility.Visible;
+                }
+                else if (pageType == typeof(PostDetail))
+                {
+                    PageMargin = new Thickness(0, 0, 0, 0);
+                    PostDetailCommandsVisibility = Visibility.Visible;
+                }
+                else if (pageType == typeof(UserProfile))
+                {
+                    PageMargin = new Thickness(0, 0, 0, 0);
+                }
+                else if (pageType == typeof(Purity.NsfwContent))
+                {
+                    PageMargin = new Thickness(0, 0, 0, 0);
+                }
+                RaisePropertyChanged();
+            }
+        }
+
+        private RelayCommand _backCommand;
+        public RelayCommand BackCommand => _backCommand ?? (_backCommand = new RelayCommand(ExecuteBackCommand));
 
         private void ExecuteBackCommand()
         {
@@ -110,6 +161,7 @@ namespace Imgur.ViewModels
         public MainViewModel()
         {
             IsBusy = true;
+            //CurrentPage = new MainList();
         }
     }
 }

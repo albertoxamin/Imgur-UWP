@@ -9,19 +9,8 @@ namespace Imgur.ViewModels
 {
     public class ViewModelLocator
     {
-        private static MainViewModel mainViewModel = new MainViewModel();
+        public static MainViewModel MainViewModel { get; set; } = new MainViewModel();
 
-        public static MainViewModel MainViewModel
-        {
-            get
-            {
-                return mainViewModel;
-            }
-
-            set
-            {
-                mainViewModel = value;
-            }
-        }
+        public static MainListViewModel MainListViewModel { get; set; } = new MainListViewModel();
     }
 }
