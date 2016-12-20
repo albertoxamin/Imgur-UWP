@@ -9,6 +9,6 @@ namespace imgur.Services
 {
     public interface IPostsDataService
     {
-        List<ImgurImage> GetPosts();
+        Task<List<ImgurImage>> GetPosts(ImgurGallerySort sort);
     }
 }

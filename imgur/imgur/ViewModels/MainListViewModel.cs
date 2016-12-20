@@ -1,53 +1,70 @@
-﻿using GalaSoft.MvvmLight;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using GalaSoft.MvvmLight;
 using Imgur.Models;
-using GalaSoft.MvvmLight.Command;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml;
 using System.Collections.ObjectModel;
 
 namespace Imgur.ViewModels
 {
     public class MainListViewModel : ViewModelBase
     {
-        public MainListViewModel()
+        public List<SortType> SortTypes { get; set; }
+        private SortType _currentSort;
+
+        public SortType CurrenSort
         {
-            Posts = new ObservableCollection<ImgurImage>(App.postsDataService.GetPosts());
+            get { return _currentSort; }
+            set { _currentSort = value; RaisePropertyChanged(); }
         }
 
-        private ObservableCollection<ImgurImage> posts;
+        public MainListViewModel()
+        {
+            Posts = new ObservableCollection<ImgurImage>();
+            SortTypes = new List<SortType>();
+            SortTypes.Add(new SortType() {Value = (int)ImgurGallerySort.Viral, Name = "Popular"});
+            SortTypes.Add(new SortType() {Value = (int)ImgurGallerySort.Time, Name = "Newest"});
+            CurrenSort = SortTypes[0];
+            LoadData();
+        }
+
+        async void LoadData()
+        {
+            var data = await App.postsDataService.GetPosts((ImgurGallerySort)CurrenSort.Value);
+            Posts = new ObservableCollection<ImgurImage>(data);
+        }
+
+        private ObservableCollection<ImgurImage> _posts;
 
         public ObservableCollection<ImgurImage> Posts
         {
             get
             {
-                return posts;
+                return _posts;
             }
             set
             {
-                posts = value;
+                _posts = value;
                 RaisePropertyChanged();
             }
         }
 
-        private ObservableCollection<Topic> topics;
+        private ObservableCollection<Topic> _topics = new ObservableCollection<Topic>();
 
         public ObservableCollection<Topic> Topics
         {
             get
             {
-                return topics;
+                return _topics;
             }
             set
             {
-                topics = value;
+                _topics = value;
             }
         }
+    }
 
+    public class SortType
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
     }
 }

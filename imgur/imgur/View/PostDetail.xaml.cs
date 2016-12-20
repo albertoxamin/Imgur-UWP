@@ -59,8 +59,8 @@ namespace Imgur
             selected = Convert.ToInt32(img[1]);
             foreach (ImgurImage i in immagini)
             {
-                i.mainPage = img[2] as MainPage;
-                i.Frame = Frame;
+                //i.mainPage = img[2] as MainPage;
+                //i.Frame = Frame;
             }
             flipView.ItemsSource = immagini;
             //UpdateImages(0);

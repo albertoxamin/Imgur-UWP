@@ -108,15 +108,11 @@ namespace Imgur.Models
 
     public class ImgurImage //: ICollectionView
     {
-        public MainPage mainPage;
-        public Frame Frame;
-
-        public event EventHandler<object> CurrentChanged;
-        public event CurrentChangingEventHandler CurrentChanging;
-        public event VectorChangedEventHandler<object> VectorChanged;
         public int RowSpan {
             get
             {
+                if (Width == 0)
+                    return App.AppRandom.Next(9,16);
                 int cal = Height / Width * 10;
                 if (cal < 11)
                     cal = 11;
@@ -144,7 +140,9 @@ namespace Imgur.Models
         public string Type { get; set; }
         [JsonProperty(PropertyName = "animated")]
         public bool IsAnimated { get; set; }
+        [JsonProperty(PropertyName = "width")]
         public int Width { get; set; }
+        [JsonProperty(PropertyName = "height")]
         public int Height { get; set; }
         public Int64 Size { get; set; }
         public Int64 Views { get; set; }

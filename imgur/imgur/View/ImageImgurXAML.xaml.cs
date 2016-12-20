@@ -56,7 +56,7 @@ namespace Imgur
                 foreach (Comment c in iid)
                 {
                     c.comment = System.Net.WebUtility.HtmlDecode(c.comment);
-                    c.mainPage = (DataContext as ImgurImage).mainPage;
+                    //c.mainPage = (DataContext as ImgurImage).mainPage;
                 }
             }
             catch { }
@@ -192,7 +192,7 @@ namespace Imgur
         {
             //(DataContext as ImgurImage).mainPage.SetBusy(true);
             ImgurAccount.Account op = await App.ServiceClient.GetAccount((DataContext as ImgurImage).AccountUrl);
-            (DataContext as ImgurImage).Frame.Navigate(typeof(UserProfile), op);
+            //(DataContext as ImgurImage).Frame.Navigate(typeof(UserProfile), op);
             //(DataContext as ImgurImage).mainPage.SetBusy(false);
         }
 

@@ -11,6 +11,6 @@ namespace Imgur.ViewModels
     {
         public static MainViewModel MainViewModel { get; set; } = new MainViewModel();
 
-        public static MainListViewModel MainListViewModel { get; set; } = new MainListViewModel();
+        //public static MainListViewModel MainListViewModel { get; set; } = new MainListViewModel();
     }
 }

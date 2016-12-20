@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,31 +15,31 @@ namespace Imgur.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private ImgurGallerySection _currentSection = ImgurGallerySection.Hot;
-        private ImgurGallerySort _currentSort = ImgurGallerySort.Viral;
+        //private ImgurGallerySection _currentSection = ImgurGallerySection.Hot;
+        //private ImgurGallerySort _currentSort = ImgurGallerySort.Viral;
 
-        public ImgurGallerySection CurrentSection
-        {
-            get { return _currentSection; }
-            set
-            {
-                _currentSection = value;
-                RaisePropertyChanged();
-            }
-        }
+        //public ImgurGallerySection CurrentSection
+        //{
+        //    get { return _currentSection; }
+        //    set
+        //    {
+        //        _currentSection = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
 
-        public ImgurGallerySort CurrentSort
-        {
-            get
-            {
-                return _currentSort;
-            }
-            set
-            {
-                _currentSort = value;
-                RaisePropertyChanged();
-            }
-        }
+        //public ImgurGallerySort CurrentSort
+        //{
+        //    get
+        //    {
+        //        return _currentSort;
+        //    }
+        //    set
+        //    {
+        //        _currentSort = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
 
         private bool _isBusy;
 
@@ -52,116 +53,162 @@ namespace Imgur.ViewModels
             }
         }
 
-        #region Sharing
-        private RelayCommand _shareCommand;
-        public RelayCommand ShareCommand => _shareCommand ?? (_shareCommand = new RelayCommand(ExecuteShareCommand));
+        //#region Sharing
+        //private RelayCommand _shareCommand;
+        //public RelayCommand ShareCommand => _shareCommand ?? (_shareCommand = new RelayCommand(ExecuteShareCommand));
 
-        private void ExecuteShareCommand()
-        {
-            DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
-            dataTransferManager.DataRequested += DataTransferManager_DataRequested;
-            DataTransferManager.ShowShareUI();
-        }
+        //private void ExecuteShareCommand()
+        //{
+        //    DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
+        //    dataTransferManager.DataRequested += DataTransferManager_DataRequested;
+        //    DataTransferManager.ShowShareUI();
+        //}
 
-        private void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
-        {
-            DataRequest request = args.Request;
-            request.Data.Properties.Title = "Share post";
-            request.Data.Properties.Description = "You are going to share this post";
-            request.Data.SetText("Hello world!");
-        }
-        #endregion
+        //private void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        //{
+        //    DataRequest request = args.Request;
+        //    request.Data.Properties.Title = "Share post";
+        //    request.Data.Properties.Description = "You are going to share this post";
+        //    request.Data.SetText("Hello world!");
+        //}
+        //#endregion
 
-        private Thickness _pageMargin;
+        //private Thickness _pageMargin;
 
-        public Thickness PageMargin
-        {
-            get { return _pageMargin; }
-            set
-            {
-                _pageMargin = value;
-                RaisePropertyChanged();
-            }
-        }
+        //public Thickness PageMargin
+        //{
+        //    get { return _pageMargin; }
+        //    set
+        //    {
+        //        _pageMargin = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
 
-        private Visibility _mainListCommandsVisibility = Visibility.Collapsed;
-        public Visibility MainListCommandsVisibility
-        {
-            get
-            {
-                return _mainListCommandsVisibility;
-            }
-            set
-            {
-                _mainListCommandsVisibility = value;
-                RaisePropertyChanged();
-            }
-        }
+        //private Visibility _mainListCommandsVisibility = Visibility.Collapsed;
+        //public Visibility MainListCommandsVisibility
+        //{
+        //    get
+        //    {
+        //        return _mainListCommandsVisibility;
+        //    }
+        //    set
+        //    {
+        //        _mainListCommandsVisibility = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
 
-        private Visibility _postDetailCommandsVisibility = Visibility.Collapsed;
-        public Visibility PostDetailCommandsVisibility
-        {
-            get
-            {
-                return _postDetailCommandsVisibility;
-            }
-            set
-            {
-                _postDetailCommandsVisibility = value;
-                RaisePropertyChanged();
-            }
-        }
+        //private Visibility _postDetailCommandsVisibility = Visibility.Collapsed;
+        //public Visibility PostDetailCommandsVisibility
+        //{
+        //    get
+        //    {
+        //        return _postDetailCommandsVisibility;
+        //    }
+        //    set
+        //    {
+        //        _postDetailCommandsVisibility = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
 
-        #region Navigation
-        private Page _currentPage;
-        public Page CurrentPage
-        {
-            get
-            {
-                return _currentPage;
-            }
-            set
-            {
-                _currentPage = value;
-                MainListCommandsVisibility = Visibility.Collapsed;
-                PostDetailCommandsVisibility = Visibility.Collapsed;
-                var pageType = _currentPage.GetType();
-                if (pageType == typeof(MainList))
-                {
-                    PageMargin = new Thickness(0, 60, 0, 0);
-                    MainListCommandsVisibility = Visibility.Visible;
-                }
-                else if (pageType == typeof(PostDetail))
-                {
-                    PageMargin = new Thickness(0, 0, 0, 0);
-                    PostDetailCommandsVisibility = Visibility.Visible;
-                }
-                else if (pageType == typeof(UserProfile))
-                {
-                    PageMargin = new Thickness(0, 0, 0, 0);
-                }
-                else if (pageType == typeof(Purity.NsfwContent))
-                {
-                    PageMargin = new Thickness(0, 0, 0, 0);
-                }
-                RaisePropertyChanged();
-            }
-        }
+        //#region Navigation
+        //private Page _currentPage;
+        //public Page CurrentPage
+        //{
+        //    get
+        //    {
+        //        return _currentPage;
+        //    }
+        //    set
+        //    {
+        //        _currentPage = value;
+        //        MainListCommandsVisibility = Visibility.Collapsed;
+        //        PostDetailCommandsVisibility = Visibility.Collapsed;
+        //        var pageType = _currentPage.GetType();
+        //        if (pageType == typeof(MainList))
+        //        {
+        //            PageMargin = new Thickness(0, 60, 0, 0);
+        //            MainListCommandsVisibility = Visibility.Visible;
+        //        }
+        //        else if (pageType == typeof(PostDetail))
+        //        {
+        //            PageMargin = new Thickness(0, 0, 0, 0);
+        //            PostDetailCommandsVisibility = Visibility.Visible;
+        //        }
+        //        else if (pageType == typeof(UserProfile))
+        //        {
+        //            PageMargin = new Thickness(0, 0, 0, 0);
+        //        }
+        //        else if (pageType == typeof(Purity.NsfwContent))
+        //        {
+        //            PageMargin = new Thickness(0, 0, 0, 0);
+        //        }
+        //        RaisePropertyChanged();
+        //    }
+        //}
 
-        private RelayCommand _backCommand;
-        public RelayCommand BackCommand => _backCommand ?? (_backCommand = new RelayCommand(ExecuteBackCommand));
+        //private RelayCommand _backCommand;
+        //public RelayCommand BackCommand => _backCommand ?? (_backCommand = new RelayCommand(ExecuteBackCommand));
 
-        private void ExecuteBackCommand()
-        {
+        //private void ExecuteBackCommand()
+        //{
             
+        //}
+
+        //#endregion
+
+        private ObservableCollection<Tab> _tabs;
+        public ObservableCollection<Tab> Tabs
+        {
+            get { return _tabs; }
+            set
+            {
+                _tabs = value;
+                RaisePropertyChanged();
+            }
         }
 
-        #endregion
+        private Tab _selectedTab;
+        public Tab SelectedTab
+        {
+            get { return _selectedTab; }
+            set
+            {
+                _selectedTab = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public MainViewModel()
         {
             IsBusy = true;
             //CurrentPage = new MainList();
+            Tabs = new ObservableCollection<Tab>();
+            Tabs.Add(new Tab() { Title = "Home", Icon = "" , Page = new MainList()});
+            Tabs.Add(new Tab() { Title = "Messages", Icon = "" });
+            Tabs.Add(new Tab() { Title = "Camera", Icon = "" });
+            Tabs.Add(new Tab() { Title = "Notifications", Icon = "" });
+            Tabs.Add(new Tab() { Title = "Profile", Icon = "" });
+        }
+
+
+
+    }
+    public class Tab
+    {
+        public string Title
+        {
+            get; set;
+        }
+        public string Icon
+        {
+            get; set;
+        }
+        public Page Page
+        {
+            get; set;
         }
     }
 }

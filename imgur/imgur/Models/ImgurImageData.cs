@@ -13,6 +13,11 @@ namespace Imgur.Models
         public List<ImgurImage> Images { get; set; }
         public ImgurImage image { get; set; }
         public List<Comment> captions { get; set; }
+
+        public static implicit operator List<object>(ImgurImageData v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class TopPost

@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Imgur.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,16 +25,14 @@ namespace Imgur
     /// </summary>
     public sealed partial class MainList : Page
     {
+        MainListViewModel viewModel;
         public MainList()
         {
             this.InitializeComponent();
+            viewModel = new MainListViewModel();
+            DataContext  = viewModel;
         }
-        //MainPage parent;
-        //List<ImgurImage> immagini = new List<ImgurImage>();
-        //List<Topic> topics = new List<Topic>();
-        //int page = 0;
-        //protected override async void OnNavigatedTo(NavigationEventArgs e)
-        //{
+
         //    //if (e.NavigationMode != NavigationMode.Back)
         //    //{
         //    //var filtro = from a in data.Images
@@ -93,15 +92,15 @@ namespace Imgur
         //    Frame.Navigate(typeof(PostDetail), new ArrayList() { immagini, mailList.SelectedIndex, parent });
         //}
 
-        //private void mailList_SizeChanged(object sender, SizeChangedEventArgs e)
-        //{
-        //    VariableSizedWrapGrid appItemsPanel = (VariableSizedWrapGrid)(sender as GridView).ItemsPanelRoot;
+        private void mailList_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            VariableSizedWrapGrid appItemsPanel = (VariableSizedWrapGrid)(sender as GridView).ItemsPanelRoot;
 
-        //    double optimizedWidth = 200;
-        //    double margin = 0.0;
-        //    var number = (int)e.NewSize.Width / (int)optimizedWidth;
-        //    appItemsPanel.ItemWidth = (e.NewSize.Width - margin) / (double)number;
-        //}
+            double optimizedWidth = 200;
+            double margin = 0.0;
+            var number = (int)e.NewSize.Width / (int)optimizedWidth;
+            appItemsPanel.ItemWidth = (e.NewSize.Width - margin) / (double)number;
+        }
 
         //private void topicGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         //{
