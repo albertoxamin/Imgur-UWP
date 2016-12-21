@@ -4,10 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Imgur"
     xmlns:viewModels="using:Imgur.ViewModels"
+    xmlns:converters="using:Imgur.Converters"
     RequestedTheme="Light">
 
     <Application.Resources>
         <viewModels:ViewModelLocator x:Key="viewModelLocator"/>
+        <converters:SizeConverter x:Key="SizeConverter"/>
+        <SolidColorBrush x:Key="WhiteColor" Color="White"/>
+        <SolidColorBrush x:Key="GrayColor" Color="#FF747A84"/>
     </Application.Resources>
 
 </Application>

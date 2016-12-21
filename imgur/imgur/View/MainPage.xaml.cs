@@ -9,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -17,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Imgur.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -31,7 +33,18 @@ namespace Imgur
         public MainPage()
         {
             this.InitializeComponent();
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
         }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (ViewModelLocator.MainViewModel.CanGoBack())
+            {
+                ViewModelLocator.MainViewModel.NavigateBack();
+                e.Handled = true;
+            }
+        }
+
         //protected async override void OnNavigatedTo(NavigationEventArgs e)
         //{
         //    string startURL = "https://api.imgur.com/oauth2/authorize?client_id="+API.Client_ID+"&response_type=token&state=login";

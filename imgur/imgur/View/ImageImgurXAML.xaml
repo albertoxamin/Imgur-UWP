@@ -109,11 +109,11 @@
         </Storyboard>
     </UserControl.Resources>
 
-    <Grid Background="#FF161616" PointerEntered="Grid_PointerEntered">
+    <Grid Background="#FF212124" PointerEntered="Grid_PointerEntered">
         <ScrollViewer x:Name="scrollViewer" ViewChanged="scrollViewer_ViewChanged" Margin="0,0,0,0">
-            <StackPanel x:Name="scrollableArea" Margin="0,0,0,60" Background="#FF191919">
+            <StackPanel x:Name="scrollableArea" Margin="0,0,0,60" Background="#FF212124">
                 <StackPanel x:Name="post" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <StackPanel x:Name="topPartFull"  VerticalAlignment="Top" Margin="0" Padding="60,0" Background="#FF222222" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF1E1E1E" BorderThickness="0,0,0,1">
+                    <StackPanel x:Name="topPartFull"  VerticalAlignment="Top" Margin="0" Padding="60,0" Background="#FF2E3035" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF1E1E1E" BorderThickness="0,0,0,1">
                         <StackPanel.RenderTransform>
                             <CompositeTransform x:Name="topPartTop" TranslateY="0"/>
                         </StackPanel.RenderTransform>
@@ -135,17 +135,17 @@
                         </StackPanel>
                         <Grid HorizontalAlignment="Center" MinWidth="300">
                             <Button Width="90" Height="60" Background="{x:Null}" Click="Upvote">
-                                <Image Height="20" Source="Assets/ic_vote_unfilled.png" />
+                                <Image Height="20" Source="ms-appx:///Assets/ic_vote_unfilled.png" />
                             </Button>
                             <Button Width="90" Height="60" Background="{x:Null}" HorizontalAlignment="Center" Click="Downvote">
-                                <Image Height="20" Source="Assets/ic_vote_unfilled.png" RenderTransformOrigin="0.5,0.5" >
+                                <Image Height="20" Source="ms-appx:///Assets/ic_vote_unfilled.png" RenderTransformOrigin="0.5,0.5" >
                                     <Image.RenderTransform>
                                         <CompositeTransform Rotation="180"/>
                                     </Image.RenderTransform>
                                 </Image>
                             </Button>
                             <Button Width="90" Height="60" Background="{x:Null}" HorizontalAlignment="Right" Click="Favorite">
-                                <Image Height="20" Source="Assets/ic_heart_unfilled.png" />
+                                <Image Height="20" Source="ms-appx:///Assets/ic_heart_unfilled.png" />
                             </Button>
                         </Grid>
                     </StackPanel>
@@ -213,7 +213,7 @@
                         <TextBlock TextWrapping="Wrap" Text="{Binding description}" FontSize="12" Foreground="White" Margin="5,10,0,0"/>
                     </StackPanel>
                 </StackPanel>
-                <Grid x:Name="commentBar" Height="60" Background="#FF222222" Padding="0,10">
+                <Grid x:Name="commentBar" Height="60" Background="#FF2E3035" Padding="0,10">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0">
                         <TextBlock Text="{Binding CommCount}" Foreground="White"/>
                         <TextBlock Text="COMMENTS" Margin="10,0,0,0" Foreground="White"/>
@@ -228,20 +228,27 @@
                 </ListView>
             </StackPanel>
         </ScrollViewer>
-        <StackPanel x:Name="topPart" Visibility="Collapsed" VerticalAlignment="Top" Margin="0" Padding="60,0" Background="#FF222222" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF1E1E1E" BorderThickness="0,0,0,1">
+        <StackPanel x:Name="topPart" 
+                    Visibility="Collapsed" 
+                    VerticalAlignment="Top"
+                    Margin="0" Padding="60,0"
+                    Background="#FF2E3035"
+                    RenderTransformOrigin="0.5,0.5"
+                    BorderBrush="#4C1E1E1E"
+                    BorderThickness="0,0,0,2">
             <Grid HorizontalAlignment="Center" MinWidth="300">
                 <Button Width="90" Height="60" Background="{x:Null}" Click="Upvote">
-                    <Image Height="20" Source="Assets/ic_vote_unfilled.png" />
+                    <Image Height="20" Source="ms-appx:///Assets/ic_vote_unfilled.png" />
                 </Button>
                 <Button Width="90" Height="60" Background="{x:Null}" HorizontalAlignment="Center" Click="Downvote">
-                    <Image Height="20" Source="Assets/ic_vote_unfilled.png" RenderTransformOrigin="0.5,0.5" >
+                    <Image Height="20" Source="ms-appx:///Assets/ic_vote_unfilled.png" RenderTransformOrigin="0.5,0.5" >
                         <Image.RenderTransform>
                             <CompositeTransform Rotation="180"/>
                         </Image.RenderTransform>
                     </Image>
                 </Button>
                 <Button Width="90" Height="60" Background="{x:Null}" HorizontalAlignment="Right" Click="Favorite">
-                    <Image Height="20" Source="Assets/ic_heart_unfilled.png" />
+                    <Image Height="20" Source="ms-appx:///Assets/ic_heart_unfilled.png" />
                 </Button>
             </Grid>
         </StackPanel>
@@ -253,12 +260,12 @@
             <FontIcon IsHitTestVisible="False" Foreground="White" Glyph="&#xE010;"/>
         </Grid>
         <Grid x:Name="grid" Visibility="Collapsed" Background="#66000000">
-            <Image x:Name="Assets_BigMiddleSize_Stroke_16px_png" Margin="0" Source="Assets/BigMiddleSize_Stroke_16px.png" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" RenderTransformOrigin="0.5,0.5">
+            <Image x:Name="Assets_BigMiddleSize_Stroke_16px_png" Margin="0" Source="ms-appx:///Assets/BigMiddleSize_Stroke_16px.png" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <CompositeTransform/>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="Assets_ic_vote_filled___Copia_png" HorizontalAlignment="Center" Height="76" Source="Assets/ic_vote_filled.png" Stretch="Fill" VerticalAlignment="Center" Width="76" RenderTransformOrigin="0.5,0.5">
+            <Image x:Name="Assets_ic_vote_filled___Copia_png" HorizontalAlignment="Center" Height="76" Source="ms-appx:///Assets/ic_vote_filled - Copia.png" Stretch="Fill" VerticalAlignment="Center" Width="76" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <CompositeTransform/>
                 </Image.RenderTransform>

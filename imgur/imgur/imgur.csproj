@@ -7,12 +7,12 @@
     <ProjectGuid>{89F4694D-E036-47B5-8D93-C9A500BB4058}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>imgur</RootNamespace>
-    <AssemblyName>imgur</AssemblyName>
+    <RootNamespace>Imgur</RootNamespace>
+    <AssemblyName>Imgur</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -96,6 +96,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\SizeConverter.cs" />
+    <Compile Include="Helpers\VisualTreeHelperExtensions.cs" />
     <Compile Include="ImgurAPI\API.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -110,7 +112,11 @@
     <Compile Include="Services\IPostsDataService.cs" />
     <Compile Include="Services\LocalPostDataService.cs" />
     <Compile Include="ViewModels\MainListViewModel.cs" />
+    <Compile Include="ViewModels\PostViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="View\ChatsView.xaml.cs">
+      <DependentUpon>ChatsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ImageImgurXAML.xaml.cs">
       <DependentUpon>ImageImgurXAML.xaml</DependentUpon>
     </Compile>
@@ -126,6 +132,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MyGridView.cs" />
+    <Compile Include="View\NotificationsView.xaml.cs">
+      <DependentUpon>NotificationsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PostDetail.xaml.cs">
       <DependentUpon>PostDetail.xaml</DependentUpon>
     </Compile>
@@ -230,6 +239,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\ChatsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ImageImgurXAML.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -241,6 +254,10 @@
     <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\NotificationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PostDetail.xaml">
       <SubType>Designer</SubType>
@@ -256,11 +273,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
+    <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

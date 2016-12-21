@@ -7,6 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Imgur.Controls"
     mc:Ignorable="d">
+    <Page.Transitions>
+        <TransitionCollection>
+            <EdgeUIThemeTransition Edge="Right" />
+        </TransitionCollection>
+    </Page.Transitions>
     <Page.Resources>
         <Storyboard x:Name="Animation">
             <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(RangeBase.Value)" Storyboard.TargetName="slider">

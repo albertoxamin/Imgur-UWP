@@ -9,6 +9,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -45,6 +46,9 @@ namespace Imgur
             ConstantContainer.IMGUR_CLIENT_SECRET);
 
         public static IPostsDataService postsDataService = new LocalPostDataService();
+
+        public static Random AppRandom = new Random();
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -68,6 +72,7 @@ namespace Imgur
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
+                rootFrame.Background = new SolidColorBrush(Color.FromArgb(0xff,0x21,0x21,0x24));
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 

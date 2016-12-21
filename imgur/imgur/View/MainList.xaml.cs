@@ -2,19 +2,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Imgur.ViewModels;
+using Imgur.Helpers;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,8 +35,46 @@ namespace Imgur
         {
             this.InitializeComponent();
             viewModel = new MainListViewModel();
-            DataContext  = viewModel;
+            DataContext = viewModel;
+            Loaded += OnLoaded;
         }
+
+        private ScrollViewer scrollViewer;
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            Loaded -= OnLoaded;
+            scrollViewer = PostGridView.GetFirstDescendantOfType<ScrollViewer>();
+            scrollViewer.ViewChanging += ScrollViewerOnViewChanging;
+            ShowNavBar.Completed += delegate (object o, object o1) { finished = true; };
+            HideNavBar.Completed += delegate (object o, object o1) { finished = true; };
+        }
+
+        private double lastValue = 0;
+        private bool finished = true;
+        private int lastAnimation;
+        private void ScrollViewerOnViewChanging(object sender, ScrollViewerViewChangingEventArgs scrollViewerViewChangedEventArgs)
+        {
+            if (Math.Abs(scrollViewer.VerticalOffset - lastValue) > 10)
+                if (scrollViewer.VerticalOffset < lastValue && finished && lastAnimation != 1)
+                {
+                    finished = false;
+                    lastAnimation = 1;
+                    ShowNavBar.Begin();
+                }
+                else if (scrollViewer.VerticalOffset > lastValue && finished && lastAnimation != 2)
+                {
+                    finished = false;
+                    lastAnimation = 2;
+                    HideNavBar.Begin();
+                }
+            if (scrollViewer.VerticalOffset < 70)
+            {
+                lastAnimation = 1;
+                ShowNavBar.Begin();
+            }
+            lastValue = scrollViewer.VerticalOffset;
+        }
+
 
         //    //if (e.NavigationMode != NavigationMode.Back)
         //    //{
@@ -77,7 +120,7 @@ namespace Imgur
         //    immagini = data.Images.ToList();
         //    foreach (ImgurImage ii in immagini)
         //    {
-                
+
         //        ii.Width = Convert.ToInt16(Window.Current.Bounds.Width / 2);
         //        if (ii.Width > 200)
         //            ii.Width = 200;

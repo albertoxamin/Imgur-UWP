@@ -2,6 +2,8 @@
 using GalaSoft.MvvmLight;
 using Imgur.Models;
 using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight.Command;
+using System;
 
 namespace Imgur.ViewModels
 {
@@ -23,6 +25,8 @@ namespace Imgur.ViewModels
             SortTypes.Add(new SortType() {Value = (int)ImgurGallerySort.Viral, Name = "Popular"});
             SortTypes.Add(new SortType() {Value = (int)ImgurGallerySort.Time, Name = "Newest"});
             CurrenSort = SortTypes[0];
+
+            RefreshCommand = new RelayCommand(ExecuteRefreshCommand);
             LoadData();
         }
 
@@ -47,6 +51,26 @@ namespace Imgur.ViewModels
             }
         }
 
+        private ImgurImage _selectedPost;
+
+        public ImgurImage SelectedPost
+        {
+            get
+            {
+                return _selectedPost;
+            }
+            set
+            {
+                _selectedPost = value;
+                RaisePropertyChanged();
+                if (ViewModelLocator.MainViewModel.CurrentPage.GetType() != typeof(PostDetail))
+                {
+                    ViewModelLocator.PostViewModel = new PostViewModel(this);
+                    ViewModelLocator.MainViewModel.CurrentPage = new PostDetail();
+                }
+            }
+        }
+
         private ObservableCollection<Topic> _topics = new ObservableCollection<Topic>();
 
         public ObservableCollection<Topic> Topics
@@ -60,7 +84,18 @@ namespace Imgur.ViewModels
                 _topics = value;
             }
         }
+
+        public RelayCommand RefreshCommand { get; private set; }
+
+        private void ExecuteRefreshCommand()
+        {
+            ImgurImage value = Posts[1];
+            Posts[1] = Posts[5];
+            Posts[5] = value;
+        }
+
     }
+
 
     public class SortType
     {

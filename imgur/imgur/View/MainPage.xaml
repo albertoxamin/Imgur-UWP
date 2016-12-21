@@ -5,7 +5,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    DataContext="{Binding Source={StaticResource viewModelLocator}, Path=MainViewModel}" Background="#FF212124">
+    DataContext="{Binding Source={StaticResource viewModelLocator}, Path=MainViewModel}" 
+    Background="#FF212124">
+    <Page.Transitions>
+        <TransitionCollection>
+            <ReorderThemeTransition />
+        </TransitionCollection>
+    </Page.Transitions>
     <Page.Resources>
         <Storyboard x:Name="openLinkAnimation">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="openLink">
@@ -123,78 +129,142 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Style x:Key="TabbarStyle" TargetType="ListBoxItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="TabNavigation" Value="Local"/>
+            <Setter Property="Padding" Value="12,11,12,13"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Grid x:Name="LayoutRoot" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                            <Grid.Resources>
+                                <Style x:Key="BaseContentPresenterStyle" TargetType="ContentPresenter">
+                                    <Setter Property="FontFamily" Value="Segoe UI"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                    <Setter Property="FontSize" Value="15"/>
+                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                    <Setter Property="LineStackingStrategy" Value="MaxHeight"/>
+                                    <Setter Property="TextLineBounds" Value="Full"/>
+                                    <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings"/>
+                                </Style>
+                                <Style x:Key="BodyContentPresenterStyle" BasedOn="{StaticResource BaseContentPresenterStyle}" TargetType="ContentPresenter">
+                                    <Setter Property="FontWeight" Value="Normal"/>
+                                    <Setter Property="FontSize" Value="15"/>
+                                </Style>
+                            </Grid.Resources>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="PressedBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource GrayColor}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="PressedBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListMediumBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WhiteColor}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WhiteColor}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedPointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WhiteColor}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="PressedBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedPressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="PressedBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListAccentHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WhiteColor}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Rectangle x:Name="PressedBackground" Fill="Transparent" Control.IsTemplateFocusTarget="True"/>
+                            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Style="{StaticResource BodyContentPresenterStyle}" TextWrapping="NoWrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <Grid Background="#FF212124">
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="62"/>
         </Grid.RowDefinitions>
 
-        <Frame Grid.Row="0" Content="{Binding SelectedTab.Page}"/>
-        <Grid Grid.Row="1" Background="#FF2E3035">
+        <Frame 
+            Grid.Row="0"
+            Content="{Binding CurrentPage}"
+            >
+        </Frame>
+        <Grid Grid.Row="1"
+              Background="#FF2E3035">
             <ListBox
-                    Background="{x:Null}"
-                    Foreground="#FF747A84"
-                    ItemsSource="{Binding Tabs}"
-                    SelectedItem="{Binding SelectedTab, Mode=TwoWay}"
-                    HorizontalContentAlignment="Stretch" HorizontalAlignment="Center">
+                Background="{x:Null}"
+                Foreground="#FF747A84"
+                ItemsSource="{Binding Tabs}"
+                SelectedItem="{Binding SelectedTab, Mode=TwoWay}"
+                HorizontalContentAlignment="Stretch"
+                HorizontalAlignment="Center"
+                ItemContainerStyle="{StaticResource TabbarStyle}" 
+                ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <FontIcon Width="72"
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <FontIcon Width="72"
                                       Glyph="{Binding Icon}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Grid>
-            <!--<Grid Height="60" VerticalAlignment="Top">
-                <Grid Background="#33000000"
-                      Visibility="{Binding MainListCommandsVisibility}">
-                    <ComboBox 
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Stretch"
-                        Background="{x:Null}"
-                        Foreground="White"
-                        SelectedItem="{Binding CurrentSection}"
-                        Margin="10,0,0,0" Padding="8,4,20,4">
-                        <StackPanel Orientation="Horizontal" BorderThickness="0,0,40,0">
-                            <TextBlock Text="Most Viral" FontSize="16"/>
-                            <FontIcon Glyph="&#xE011;" FontSize="14" Margin="10,0,0,0" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </ComboBox>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                        <ListBoxItem Padding="0">
-                            <Button Background="{x:Null}" Padding="12,0" Height="60">
-                                <Image Source="ms-appx:///Assets/ic_action_search.png" Width="25"/>
-                            </Button>
-                        </ListBoxItem>
-                        <ListBoxItem Padding="0">
-                            <Button Background="{x:Null}" Padding="12,0" Height="60">
-                                <Button.Flyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Tag="0" Text="Popular"/>
-                                        <MenuFlyoutItem Tag="1" Text="Newest" />
-                                    </MenuFlyout>
-                                </Button.Flyout>
-                                <Image Source="ms-appx:///Assets/ic_sort_white_24dp.png" Width="25"/>
-                            </Button>
-                        </ListBoxItem>
-                    </StackPanel>
-                </Grid>
-                <Grid
-                     Visibility="{Binding PostDetailCommandsVisibility}"
-                     Margin="0,0,0,0">
-                    <Button Background="#00000000" Padding="12,0" Height="60" Width="60">
-                        <SymbolIcon Foreground="#FFBBBBBB" Symbol="Back"/>
-                    </Button>
-                </Grid>
-            </Grid>-->
-        <ProgressRing IsActive="{Binding IsBusy}" Foreground="#FF85BF25"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <!--<ProgressRing IsActive="{Binding IsBusy}" Foreground="#FF85BF25"/>-->
         <Grid x:Name="openLink" Visibility="Collapsed" Background="#7F000000">
             <Grid.RowDefinitions>
                 <RowDefinition Height="27*"/>

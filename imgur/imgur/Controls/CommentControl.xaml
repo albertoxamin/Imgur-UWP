@@ -12,23 +12,23 @@
     <Grid Height="Auto" Background="#00000000" PointerReleased="ShowReplies">
         <StackPanel Padding="0,0,0,10">
             <StackPanel BorderBrush="#FF6C6C6C" BorderThickness="2,0,0,0" Margin="-12,0,0,0" Padding="12,0,0,0">
-            <TextBlock x:Name="caption" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,20,20" Foreground="White" TextAlignment="Justify">
-                
-            </TextBlock>
-            <Grid IsHitTestVisible="False">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding author}" Foreground="#FF4E76C9"/>
-                    <Image Source="Assets/ic_gallery_meta_points.png" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="10" Margin="10,0,0,0"/>
-                    <TextBlock Margin="5,0,0,0" Text="{Binding points}" Foreground="#FFCCCCCC"/>
-                    <Image Source="Assets/comment_meta_time.png" Margin="15,0,0,0" Height="10"/>
-                    <TextBlock Text="{Binding shortDate}" Foreground="#FFCCCCCC" Margin="5,0,0,0"/>
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding repliesVisibility}" HorizontalAlignment="Right" Margin="0,0,20,0">
-                        <Image Source="Assets/comment_meta_replies.png" Margin="15,0,0,0" Height="10"/>
-                        <TextBlock Text="{Binding repliesCount}" Foreground="#FFCCCCCC"/>
-                        <TextBlock x:Name="repliesTextBlock" Text="replies" Margin="5,0,0,0" Foreground="#FFCCCCCC" Loaded="repliesTextBlock_Loaded"/>
+                <TextBlock x:Name="caption" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,20,20" Foreground="White" TextAlignment="Justify">
+
+                </TextBlock>
+                <Grid IsHitTestVisible="False">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding author}" Foreground="#FF4E76C9"/>
+                        <Image Source="ms-appx:///Assets/ic_gallery_meta_points.png" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="10" Margin="10,0,0,0"/>
+                        <TextBlock Margin="5,0,0,0" Text="{Binding points}" Foreground="#FFCCCCCC"/>
+                        <Image Source="ms-appx:///Assets/comment_meta_time.png" Margin="15,0,0,0" Height="10"/>
+                        <TextBlock Text="{Binding shortDate}" Foreground="#FFCCCCCC" Margin="5,0,0,0"/>
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding repliesVisibility}" HorizontalAlignment="Right" Margin="0,0,20,0">
+                            <Image Source="ms-appx:///Assets/comment_meta_replies.png" Margin="15,0,0,0" Height="10"/>
+                            <TextBlock Text="{Binding repliesCount}" Foreground="#FFCCCCCC"/>
+                            <TextBlock x:Name="repliesTextBlock" Text="replies" Margin="5,0,0,0" Foreground="#FFCCCCCC" Loaded="repliesTextBlock_Loaded"/>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </Grid>
+                </Grid>
             </StackPanel>
             <ListView ScrollViewer.VerticalScrollMode="Disabled" x:Name="replies" Visibility="Collapsed" Background="#33000000" ItemsSource="{Binding children}" Margin="10,0,0,0" SelectionMode="None">
                 <ListView.ItemTemplate>

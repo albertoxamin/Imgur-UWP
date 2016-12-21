@@ -53,7 +53,7 @@ namespace Imgur
         int selected;
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            progressRing.IsActive = true;
+            //progressRing.IsActive = true;
             ArrayList img = e.Parameter as ArrayList;
             immagini = img[0] as List<ImgurImage>;
             selected = Convert.ToInt32(img[1]);
@@ -67,7 +67,7 @@ namespace Imgur
             flipView.SelectedIndex = selected;
             base.OnNavigatedTo(e);
             await Task.Delay(2000);
-            progressRing.IsActive = false;
+            //progressRing.IsActive = false;
 
         }
 

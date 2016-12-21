@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight.Command;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
+using Imgur.View;
 
 namespace Imgur.ViewModels
 {
@@ -177,9 +178,39 @@ namespace Imgur.ViewModels
             set
             {
                 _selectedTab = value;
+                CurrentPage = SelectedTab.CurrentPage();
                 RaisePropertyChanged();
             }
         }
+
+        private Page _currentPage;
+
+        public Page CurrentPage
+        {
+            get
+            {
+                return _currentPage;
+            }
+            set
+            {
+                if (value != CurrentPage) { 
+                    _currentPage = value;
+                    SelectedTab.NavigationStack.Push(_currentPage);
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public void NavigateBack()
+        {
+            CurrentPage = SelectedTab.NavigateBack();
+        }
+
+        public bool CanGoBack()
+        {
+            return SelectedTab.CanGoBack();
+        }
+
 
         public MainViewModel()
         {
@@ -187,10 +218,11 @@ namespace Imgur.ViewModels
             //CurrentPage = new MainList();
             Tabs = new ObservableCollection<Tab>();
             Tabs.Add(new Tab() { Title = "Home", Icon = "" , Page = new MainList()});
-            Tabs.Add(new Tab() { Title = "Messages", Icon = "" });
+            Tabs.Add(new Tab() { Title = "Messages", Icon = "", Page = new ChatsView()});
             Tabs.Add(new Tab() { Title = "Camera", Icon = "" });
-            Tabs.Add(new Tab() { Title = "Notifications", Icon = "" });
-            Tabs.Add(new Tab() { Title = "Profile", Icon = "" });
+            Tabs.Add(new Tab() { Title = "Notifications", Icon = "", Page = new NotificationsView()});
+            Tabs.Add(new Tab() { Title = "Profile", Icon = "", Page = new UserProfile()});
+            SelectedTab = Tabs[0];
         }
 
 
@@ -210,5 +242,27 @@ namespace Imgur.ViewModels
         {
             get; set;
         }
+
+        public Page NavigateBack()
+        {
+            if (NavigationStack.Count > 0)
+                NavigationStack.Pop();
+            return CurrentPage();
+        }
+
+        public bool CanGoBack()
+        {
+            return (NavigationStack.Count == 0)?((CurrentPage() != Page)):true;
+        }
+
+        public Page CurrentPage()
+        {
+            if (NavigationStack.Count > 0)
+                return NavigationStack.Peek();
+            else
+                return Page;
+        }
+
+        public Stack<Page> NavigationStack = new Stack<Page>();
     }
 }

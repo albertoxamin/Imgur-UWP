@@ -5,15 +5,46 @@
     xmlns:local="using:Imgur"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+     DataContext="{Binding Source={StaticResource viewModelLocator}, Path=PostViewModel}">
+    <Page.Transitions>
+        <TransitionCollection>
+            <EdgeUIThemeTransition Edge="Right" />
+        </TransitionCollection>
+    </Page.Transitions>
     <Grid>
-        <FlipView VirtualizingStackPanel.VirtualizationMode="Standard" x:Name="flipView" SelectionChanged="flipView_SelectionChanged">
+        <FlipView
+            VirtualizingStackPanel.VirtualizationMode="Standard"
+            x:Name="flipView"
+            SelectionChanged="flipView_SelectionChanged"
+            ItemsSource="{Binding ParentViewModel.Posts}"
+            SelectedValue="{Binding ParentViewModel.SelectedPost, Mode=TwoWay}">
             <FlipView.ItemTemplate>
                 <DataTemplate>
                     <local:ImageImgurXAML DataContext="{Binding}"/>
                 </DataTemplate>
             </FlipView.ItemTemplate>
         </FlipView>
-        <ProgressRing x:Name="progressRing"/>
+        <Button Width="70"
+                Height="70"
+                Padding="0"
+                Background="Transparent" 
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" 
+                Margin="0,0,15,15"
+                Command="{Binding ShareCommand}">
+            <Grid MinWidth="60" MinHeight="60">
+                <Ellipse Fill="#FF1BB76E"/>
+                <FontIcon  Glyph="" Foreground="White"/>
+            </Grid>
+        </Button>
+        <Grid Margin="0,0,0,0" VerticalAlignment="Top">
+            <Button
+                Command="{Binding BackCommand}"
+                Background="#00000000" 
+                Padding="12,0" Height="60" Width="60">
+                <SymbolIcon Foreground="#FFBBBBBB" Symbol="Back"/>
+            </Button>
+        </Grid>
     </Grid>
 </Page>
