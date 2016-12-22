@@ -83,7 +83,8 @@ namespace Imgur.ViewModels
             request.Data.Properties.Title = "Share post";
             request.Data.Properties.Description = "You are going to share this post";
             request.Data.SetText(SelectedPost.Title + System.Environment.NewLine + SelectedPost.link);
-            request.Data.SetBitmap(RandomAccessStreamReference.CreateFromUri(new Uri(SelectedPost.Thumbnail, UriKind.Absolute)));
+            if (!SelectedPost.IsAnimated)
+                request.Data.SetBitmap(RandomAccessStreamReference.CreateFromUri(new Uri(SelectedPost.Thumbnail, UriKind.Absolute)));
         }
     }
 }

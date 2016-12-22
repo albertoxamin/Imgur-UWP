@@ -379,6 +379,17 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        }
+      },
       "MvvmLight/5.3.0": {
         "type": "package",
         "dependencies": {
@@ -2265,6 +2276,20 @@
             "rid": "aot"
           }
         }
+      },
+      "Template10/1.1.12": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Newtonsoft.Json": "8.0.3"
+        },
+        "compile": {
+          "lib/uap10.0/Template10Library.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Template10Library.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
@@ -2590,6 +2615,17 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "MvvmLight/5.3.0": {
@@ -4639,6 +4675,20 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Template10/1.1.12": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Newtonsoft.Json": "8.0.3"
+        },
+        "compile": {
+          "lib/uap10.0/Template10Library.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Template10Library.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
@@ -4965,6 +5015,17 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "MvvmLight/5.3.0": {
@@ -7052,6 +7113,20 @@
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Template10/1.1.12": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Newtonsoft.Json": "8.0.3"
+        },
+        "compile": {
+          "lib/uap10.0/Template10Library.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Template10Library.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64": {
@@ -7380,6 +7455,17 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "MvvmLight/5.3.0": {
@@ -9435,6 +9521,20 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Template10/1.1.12": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Newtonsoft.Json": "8.0.3"
+        },
+        "compile": {
+          "lib/uap10.0/Template10Library.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Template10Library.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
@@ -9764,6 +9864,17 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "MvvmLight/5.3.0": {
@@ -11857,6 +11968,20 @@
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Template10/1.1.12": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Newtonsoft.Json": "8.0.3"
+        },
+        "compile": {
+          "lib/uap10.0/Template10Library.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Template10Library.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86": {
@@ -12185,6 +12310,17 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "MvvmLight/5.3.0": {
@@ -14240,6 +14376,20 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Template10/1.1.12": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Newtonsoft.Json": "8.0.3"
+        },
+        "compile": {
+          "lib/uap10.0/Template10Library.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Template10Library.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
@@ -14569,6 +14719,17 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "MvvmLight/5.3.0": {
@@ -16662,6 +16823,20 @@
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Template10/1.1.12": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Newtonsoft.Json": "8.0.3"
+        },
+        "compile": {
+          "lib/uap10.0/Template10Library.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Template10Library.dll": {}
+        }
       }
     }
   },
@@ -17194,6 +17369,22 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._"
+      ]
+    },
+    "Microsoft.Xaml.Behaviors.Uwp.Managed/1.1.0": {
+      "sha512": "Qxe4fblviCn2oFf7C4ahCsZHC0GzRa7Tz5z+L1QUHUljY3Oj/TMoT1O0jJ+ru6RcJ9qS8yFw/jIvstg2dxxpGA==",
+      "type": "package",
+      "files": [
+        "Microsoft.Xaml.Behaviors.Uwp.Managed.1.1.0.nupkg.sha512",
+        "Microsoft.Xaml.Behaviors.Uwp.Managed.nuspec",
+        "lib/uap10.0/Design/Microsoft.Xaml.Interactions.Design.dll",
+        "lib/uap10.0/Design/Microsoft.Xaml.Interactivity.Design.dll",
+        "lib/uap10.0/Microsoft.Xaml.Interactions.dll",
+        "lib/uap10.0/Microsoft.Xaml.Interactions.pri",
+        "lib/uap10.0/Microsoft.Xaml.Interactions.xml",
+        "lib/uap10.0/Microsoft.Xaml.Interactivity.dll",
+        "lib/uap10.0/Microsoft.Xaml.Interactivity.pri",
+        "lib/uap10.0/Microsoft.Xaml.Interactivity.xml"
       ]
     },
     "MvvmLight/5.3.0": {
@@ -23646,6 +23837,25 @@
         "ref/xamarinwatchos10/_._",
         "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll"
       ]
+    },
+    "Template10/1.1.12": {
+      "sha512": "FTvwISozoKs5syQkwaHl/s8iPts23Q+VFjTbnNnA+ad6MHqP5bOiq3ibjEXHGJkN5nSKY7FoMH4W1/aCS1n/ew==",
+      "type": "package",
+      "files": [
+        "Template10.1.1.12.nupkg.sha512",
+        "Template10.nuspec",
+        "build/uap10.0/Template10.targets",
+        "lib/uap10.0/Template10Library.dll",
+        "lib/uap10.0/Template10Library.pri",
+        "lib/uap10.0/Template10Library/Controls/HamburgerMenu.xaml",
+        "lib/uap10.0/Template10Library/Properties/Template10Library.rd.xml",
+        "lib/uap10.0/Template10Library/Template10Library.xr.xml",
+        "lib/uap10.0/Template10Library/Themes/Generic.xaml",
+        "lib/uap10.0/Template10Library/Themes/HamburgerMenu.xaml",
+        "lib/uap10.0/Template10Library/Themes/ModalDialog.xaml",
+        "lib/uap10.0/Template10Library/Themes/PageHeader.xaml",
+        "lib/uap10.0/Template10Library/Themes/Resizer.xaml"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -23657,7 +23867,8 @@
       "Microsoft.Net.Http >= 2.2.29",
       "MvvmLight >= 5.3.0",
       "Newtonsoft.Json >= 9.0.1",
-      "System.Collections.NonGeneric >= 4.3.0"
+      "System.Collections.NonGeneric >= 4.3.0",
+      "Template10 >= 1.1.12"
     ],
     "UAP,Version=v10.0": []
   }

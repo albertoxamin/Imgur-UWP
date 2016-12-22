@@ -112,26 +112,26 @@
     <Grid Background="#FF212124" PointerEntered="Grid_PointerEntered">
         <ScrollViewer x:Name="scrollViewer" ViewChanged="scrollViewer_ViewChanged" Margin="0,0,0,0">
             <StackPanel x:Name="scrollableArea" Margin="0,0,0,60" Background="#FF212124">
-                <StackPanel x:Name="post" Background="{x:Null}" BorderBrush="{x:Null}">
+                <StackPanel x:Name="post" Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0,0,0,5">
                     <StackPanel x:Name="topPartFull"  VerticalAlignment="Top" Margin="0" Padding="60,0" Background="#FF2E3035" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF1E1E1E" BorderThickness="0,0,0,1">
                         <StackPanel.RenderTransform>
                             <CompositeTransform x:Name="topPartTop" TranslateY="0"/>
                         </StackPanel.RenderTransform>
-                        <TextBlock TextWrapping="Wrap" Text="{Binding Title}" FontSize="20" Foreground="White" Margin="0,15,0,0" />
-                        <StackPanel Orientation="Horizontal" Height="20" Margin="0,10">
-                            <TextBlock Margin="0" Text="By" Foreground="#FF6C6C6C"/>
-                            <TextBlock x:Name="accountID" Text="{Binding AccountUrl}" Foreground="#FF4E76C9" Tapped="accountID_Tapped" Margin="5,0,0,0" FontWeight="Medium"/>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Title}" FontSize="15" Foreground="White" Margin="0,15,0,0" />
+                        <StackPanel Orientation="Horizontal" Height="20" Margin="0,5">
+                            <TextBlock Margin="0" Text="By" Foreground="#FF6C6C6C" FontSize="12"/>
+                            <TextBlock x:Name="accountID" Text="{Binding AccountUrl}" Foreground="#FF4E76C9" Tapped="accountID_Tapped" Margin="5,0,0,0" FontWeight="Medium" FontSize="12"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="Assets/upvote_meta.png" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="10" />
-                            <TextBlock Margin="5,0,0,0" Text="{Binding Upvotes}" Foreground="#FF6C6C6C"/>
-                            <TextBlock Margin="5,0,0,0" Text="Points" Foreground="#FF6C6C6C"/>
+                            <Image Source="ms-appx:///Assets/upvote_meta.png" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="10" />
+                            <TextBlock Margin="5,0,0,0" Text="{Binding Upvotes}" Foreground="#FF6C6C6C" FontSize="12"/>
+                            <TextBlock Margin="5,0,0,0" Text="Points" Foreground="#FF6C6C6C" FontSize="12"/>
                             <!--<Image Margin="15,0,0,0" Source="Assets/ic_gallery_meta_comments.png" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="10"/>
                 <TextBlock Margin="5,0,0,0" Text="{Binding CommCount}" Foreground="White"/>
                 <Image Visibility="{Binding AlbumVisbility}" Source="Assets/ic_gallery_meta_album.png" Margin="15,0,0,0" Height="10"/>
                 <TextBlock Visibility="{Binding AlbumVisbility}" Text="{Binding images_count}" Foreground="White" Margin="5,0,0,0"/>-->
-                            <Image Source="Assets/time_meta.png" Margin="15,0,0,0" Height="10"/>
-                            <TextBlock Text="{Binding shortDate}" Foreground="#FF6C6C6C" Margin="5,0,0,0"/>
+                            <Image Source="ms-appx:///Assets/time_meta.png" Margin="15,0,0,0" Height="10"/>
+                            <TextBlock Text="{Binding shortDate}" Foreground="#FF6C6C6C" Margin="5,0,0,0" FontSize="12"/>
                         </StackPanel>
                         <Grid HorizontalAlignment="Center" MinWidth="300">
                             <Button Width="90" Height="60" Background="{x:Null}" Click="Upvote">
@@ -149,13 +149,35 @@
                             </Button>
                         </Grid>
                     </StackPanel>
-                    <ListView x:Name="immaginiList" x:DeferLoadStrategy="Lazy" Height="Auto" ScrollViewer.VerticalScrollMode="Disabled" Tag="{Binding ID}" Visibility="{Binding AlbumVisbility}" Background="#00000000" Loaded="immaginiList_Loaded" SelectionMode="None">
+                    <ListView 
+                        x:Name="immaginiList"
+                        x:DeferLoadStrategy="Lazy"
+                        Height="Auto"
+                        ScrollViewer.VerticalScrollMode="Disabled"
+                        Tag="{Binding ID}"
+                        Visibility="{Binding AlbumVisbility}"
+                        Background="#00000000"
+                        Loaded="immaginiList_Loaded"
+                        SelectionMode="None" HorizontalContentAlignment="Stretch">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <RepositionThemeTransition/>
+                                <EntranceThemeTransition/>
+                            </TransitionCollection>
+                        </ListView.ItemContainerTransitions>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="5,0,0,5" BorderThickness="0">
+                                <StackPanel Margin="-11,5,-11,5" BorderThickness="0" Background="#FF2E3035">
                                     <TextBlock Visibility="{Binding titleVisibility}" TextWrapping="Wrap" Text="{Binding title}" FontSize="16" Foreground="White" Margin="10,0,0,5"/>
                                     <Grid>
-                                        <Image MaxWidth="50" Source="Assets/ic_gallery_placeholder.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Image MaxWidth="50" Source="ms-appx:///Assets/ic_gallery_placeholder.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <ProgressBar Foreground="{StaticResource ImgurGreen}" IsIndeterminate="True" VerticalAlignment="Top"/>
                                         <Image DoubleTapped="UpvoteDoubleTap" Holding="Image_Holding" RightTapped="Image_RightTapped" Source="{Binding link}" Visibility="{Binding IsGifReverse}">
                                             <FlyoutBase.AttachedFlyout>
                                                 <Flyout>
@@ -178,16 +200,22 @@
                                             </FlyoutBase.AttachedFlyout>
                                         </MediaElement>
                                     </Grid>
-                                    <TextBlock Visibility="{Binding descriptionVisibility}" TextWrapping="Wrap" Text="{Binding description}" FontSize="12" Foreground="White" Margin="5,10,0,0"/>
+                                    <TextBlock 
+                                        Visibility="{Binding descriptionVisibility}"
+                                        TextWrapping="Wrap"
+                                        Text="{Binding description}"
+                                        FontSize="12"
+                                        Foreground="White"
+                                        Margin="10"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
 
                     </ListView>
-                    <StackPanel x:Name="immagini" Visibility="{Binding AlbumVisibilityReverse}" Padding="0" Margin="0,0,0,10">
-                        <TextBlock Visibility="{Binding AlbumVisbility}" TextWrapping="Wrap" Text="{Binding Title}" FontSize="16" Foreground="White" Margin="10,10,0,0"/>
+                    <StackPanel x:Name="immagini" Visibility="{Binding AlbumVisibilityReverse}" Padding="0" Margin="0,0,0,0">
+                        <!--<TextBlock Visibility="{Binding AlbumVisbility}" TextWrapping="Wrap" Text="{Binding Title}" FontSize="16" Foreground="White" Margin="10,10,0,0"/>-->
                         <Grid>
-                            <Image MaxWidth="50" Source="Assets/ic_gallery_placeholder.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Image MaxWidth="50" Source="ms-appx:///Assets/ic_gallery_placeholder.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <Image DoubleTapped="UpvoteDoubleTap" Holding="Image_Holding" RightTapped="Image_RightTapped" Source="{Binding link}" Visibility="{Binding IsGifReverse}">
                                 <FlyoutBase.AttachedFlyout>
                                     <Flyout>
@@ -219,7 +247,23 @@
                         <TextBlock Text="COMMENTS" Margin="10,0,0,0" Foreground="White"/>
                     </StackPanel>
                 </Grid>
-                <ListView ScrollViewer.VerticalScrollMode="Disabled" x:Name="commenti" ItemsSource="{Binding comment_preview}" Background="{x:Null}" SelectionMode="None">
+                <ListView 
+                    ScrollViewer.VerticalScrollMode="Disabled" 
+                    x:Name="commenti"
+                    ItemsSource="{Binding comment_preview}"
+                    Background="{x:Null}" 
+                    SelectionMode="None" HorizontalContentAlignment="Stretch">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemContainerTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition/>
+                            <RepositionThemeTransition/>
+                        </TransitionCollection>
+                    </ListView.ItemContainerTransitions>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <local:CommentControl DataContext="{Binding}"/>

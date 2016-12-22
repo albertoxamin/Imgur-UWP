@@ -264,7 +264,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <!--<ProgressRing IsActive="{Binding IsBusy}" Foreground="#FF85BF25"/>-->
+        <ProgressRing IsActive="{Binding IsBusy}" Foreground="#FF85BF25"/>
         <Grid x:Name="openLink" Visibility="Collapsed" Background="#7F000000">
             <Grid.RowDefinitions>
                 <RowDefinition Height="27*"/>

@@ -4,6 +4,7 @@ using Imgur.Models;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Command;
 using System;
+using System.Threading.Tasks;
 
 namespace Imgur.ViewModels
 {
@@ -15,7 +16,12 @@ namespace Imgur.ViewModels
         public SortType CurrenSort
         {
             get { return _currentSort; }
-            set { _currentSort = value; RaisePropertyChanged(); }
+            set
+            {
+                _currentSort = value;
+                RaisePropertyChanged();
+                LoadData();
+            }
         }
 
         public MainListViewModel()
@@ -27,13 +33,25 @@ namespace Imgur.ViewModels
             CurrenSort = SortTypes[0];
 
             RefreshCommand = new RelayCommand(ExecuteRefreshCommand);
+            SetPopularCommand = new RelayCommand(ExecuteSetPopularCommand);
+            SetNewestCommand = new RelayCommand(ExecuteSetNewestCommand);
             LoadData();
         }
 
+        private bool isSelectionChangedCooledDown;
+
         async void LoadData()
         {
+            isSelectionChangedCooledDown = true;
+            if (ViewModelLocator.MainViewModel != null)
+                ViewModelLocator.MainViewModel.IsBusy = true;
+            Posts.Clear();
             var data = await App.postsDataService.GetPosts((ImgurGallerySort)CurrenSort.Value);
             Posts = new ObservableCollection<ImgurImage>(data);
+            if (ViewModelLocator.MainViewModel != null)
+                ViewModelLocator.MainViewModel.IsBusy = false;
+            await Task.Delay(200);
+            isSelectionChangedCooledDown = false;
         }
 
         private ObservableCollection<ImgurImage> _posts;
@@ -63,7 +81,7 @@ namespace Imgur.ViewModels
             {
                 _selectedPost = value;
                 RaisePropertyChanged();
-                if (ViewModelLocator.MainViewModel.CurrentPage.GetType() != typeof(PostDetail))
+                if (ViewModelLocator.MainViewModel.CurrentPage.GetType() != typeof(PostDetail) && !isSelectionChangedCooledDown)
                 {
                     ViewModelLocator.PostViewModel = new PostViewModel(this);
                     ViewModelLocator.MainViewModel.CurrentPage = new PostDetail();
@@ -94,6 +112,19 @@ namespace Imgur.ViewModels
             Posts[5] = value;
         }
 
+        public RelayCommand SetPopularCommand { get; private set; }
+
+        private void ExecuteSetPopularCommand()
+        {
+            CurrenSort = SortTypes[0];
+        }
+
+        public RelayCommand SetNewestCommand { get; private set; }
+
+        private void ExecuteSetNewestCommand()
+        {
+            CurrenSort = SortTypes[1];
+        }
     }
 
 

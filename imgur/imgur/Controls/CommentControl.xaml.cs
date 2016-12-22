@@ -42,12 +42,6 @@ namespace Imgur
             }
         }
 
-        private void repliesTextBlock_Loaded(object sender, RoutedEventArgs e)
-        {
-            int rc = (DataContext as Comment).repliesCount;
-            if (rc == 1)
-                repliesTextBlock.Text = "reply";
-        }
         string link = "";
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

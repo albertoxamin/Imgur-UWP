@@ -125,7 +125,7 @@
                                     <GradientStop Color="#FF474A51" Offset="0.697"/>
                                 </LinearGradientBrush>
                             </Grid.BorderBrush>
-                            <Image Stretch="UniformToFill" Source="Assets/ic_gallery_placeholder.png"/>
+                            <Image Stretch="UniformToFill" Source="ms-appx:///Assets/ic_gallery_placeholder.png"/>
                             <Image Stretch="UniformToFill" Margin="-1,0"
                                Source="{Binding Thumbnail}"/>
                             <Grid Height="Auto" VerticalAlignment="Bottom" Background="#FF474A51" RenderTransformOrigin="0.5,0.5">
@@ -204,16 +204,14 @@
                 <ListBoxItem Padding="0">
                     <Button Background="{x:Null}" Padding="12,0" Height="60">
                         <Button.Flyout>
-                            <ListPickerFlyout
-                                ItemsSource="{Binding SortTypes}"
-                                SelectedValue="{Binding CurrenSort, Mode=TwoWay}"
-                                Placement="Top" SelectedIndex="-1">
-                                <ListPickerFlyout.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ListPickerFlyout.ItemTemplate>
-                            </ListPickerFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem
+                                    Command="{Binding SetPopularCommand}"
+                                    Text="{Binding SortTypes[0].Name}"/>
+                                <MenuFlyoutItem 
+                                    Command="{Binding SetNewestCommand}" 
+                                    Text="{Binding SortTypes[1].Name}"/>
+                            </MenuFlyout>
                         </Button.Flyout>
                         <Image Source="ms-appx:///Assets/ic_sort_white_24dp.png" Width="25"/>
                     </Button>

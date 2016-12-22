@@ -350,20 +350,20 @@ namespace Imgur.Models
         public object vote { get; set; }
         public string platform { get; set; }
         public List<Comment> children { get; set; }
-        public int repliesCount {
+        public string repliesCount {
             get
             {
                 if (children != null)
-                    return children.Count;
+                    return children.Count + " " + ((children.Count == 1)? "reply": "replies");
                 else
-                    return 0;
+                    return "";
             }
         }
         public Visibility repliesVisibility
         {
             get
             {
-                if (repliesCount == 0)
+                if (repliesCount == "")
                     return Visibility.Collapsed;
                 else
                     return Visibility.Visible;
