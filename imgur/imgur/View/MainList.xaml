@@ -7,6 +7,7 @@
     xmlns:controls="using:Imgur.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uwpControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModels:MainListViewModel}">
     <Page.Transitions>
@@ -118,37 +119,45 @@
             <controls:MyGridView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="2">
-                        <Grid BorderThickness="2" CornerRadius="1">
-                            <Grid.BorderBrush>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#002C2C2C" Offset="0.385"/>
-                                    <GradientStop Color="#FF474A51" Offset="0.697"/>
-                                </LinearGradientBrush>
-                            </Grid.BorderBrush>
-                            <Image Stretch="UniformToFill" Source="ms-appx:///Assets/ic_gallery_placeholder.png"/>
-                            <Image Stretch="UniformToFill" Margin="-1,0"
-                               Source="{Binding Thumbnail}"/>
-                            <Grid Height="Auto" VerticalAlignment="Bottom" Background="#FF474A51" RenderTransformOrigin="0.5,0.5">
-                                <Grid.RenderTransform>
-                                    <CompositeTransform ScaleX="1.01" ScaleY="1.01"/>
-                                </Grid.RenderTransform>
-                                <StackPanel VerticalAlignment="Bottom" Margin="10">
-                                    <TextBlock TextTrimming="WordEllipsis" MaxLines="2" TextWrapping="Wrap" VerticalAlignment="Center"  Text="{Binding Title}" Foreground="White" Margin="0,0,0,5"/>
-                                    <StackPanel Orientation="Horizontal" Height="20">
-                                        <Image Source="ms-appx:///Assets/post_upvote.png" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="10"/>
-                                        <TextBlock Margin="5,0,0,0" Text="{Binding Upvotes}" Foreground="#FF6C6C6C"/>
-                                        <TextBlock Margin="5,0,0,0" Text="Points" Foreground="#FF6C6C6C"/>
-                                        <!--<Image Margin="15,0,0,0" Source="Assets/ic_gallery_meta_comments.png" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="10"/>
+                        <uwpControls:DropShadowPanel
+                            ShadowOpacity="0.2">
+                            <Grid BorderThickness="2" CornerRadius="1">
+                                <Grid.BorderBrush>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#002C2C2C" Offset="0.385"/>
+                                        <GradientStop Color="#FF474A51" Offset="0.697"/>
+                                    </LinearGradientBrush>
+                                </Grid.BorderBrush>
+                                <!--<Image Stretch="UniformToFill" Source="ms-appx:///Assets/ic_gallery_placeholder.png"/>-->
+                                <uwpControls:ImageEx
+                                    Stretch="UniformToFill"
+                                    Foreground="{StaticResource ImgurGreen}"
+                                    PlaceholderSource="ms-appx:///Assets/ic_gallery_placeholder.png"
+                                    Source="{Binding Thumbnail}"
+                                    Margin="-1,0"/>
+                                <Grid Height="Auto" VerticalAlignment="Bottom" Background="#FF474A51" RenderTransformOrigin="0.5,0.5">
+                                    <Grid.RenderTransform>
+                                        <CompositeTransform ScaleX="1.01" ScaleY="1.01"/>
+                                    </Grid.RenderTransform>
+                                    <StackPanel VerticalAlignment="Bottom" Margin="10">
+                                        <TextBlock TextTrimming="WordEllipsis" MaxLines="2" TextWrapping="Wrap" VerticalAlignment="Center"  Text="{Binding Title}" Foreground="White" Margin="0,0,0,5"/>
+                                        <StackPanel Orientation="Horizontal" Height="20">
+                                            <Image Source="ms-appx:///Assets/post_upvote.png" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="10"/>
+                                            <TextBlock Margin="5,0,0,0" Text="{Binding Upvotes}" Foreground="#FF6C6C6C"/>
+                                            <TextBlock Margin="5,0,0,0" Text="Points" Foreground="#FF6C6C6C"/>
+                                            <!--<Image Margin="15,0,0,0" Source="Assets/ic_gallery_meta_comments.png" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="10"/>
                                     <TextBlock Margin="5,0,0,0" Text="{Binding CommCount}" Foreground="White"/>-->
+                                        </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                            <Image Visibility="{Binding IsGif}" Margin="0,5,5,0" HorizontalAlignment="Right" VerticalAlignment="Top" Source="Assets/ic_gallery_gif_tag.png" Height="15"/>
-                            <!--<StackPanel Orientation="Horizontal" Visibility="{Binding AlbumVisbility}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5">
+                                </Grid>
+                                <Image Visibility="{Binding IsGif}" Margin="0,5,5,0" HorizontalAlignment="Right" VerticalAlignment="Top" Source="ms-appx:///Assets/ic_gallery_gif_tag.png" Height="15"/>
+                                <!--<StackPanel Orientation="Horizontal" Visibility="{Binding AlbumVisbility}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5">
                             <TextBlock Text="{Binding images_count}" Foreground="White"/>
                             <Image Source="Assets/ic_gallery_meta_album.png" Margin="5,0,0,0" Height="10"/>
                         </StackPanel>-->
-                        </Grid>
+                            </Grid>
+                        </uwpControls:DropShadowPanel>
+                        
                     </Grid>
                 </DataTemplate>
             </controls:MyGridView.ItemTemplate>
@@ -175,6 +184,10 @@
                 </GridView.ItemTemplate>
             </GridView>
         </Grid>-->
+        <uwpControls:DropShadowPanel
+            Opacity=".4">
+            
+        </uwpControls:DropShadowPanel>
         <Grid x:Name="grid" Background="#FF2E3035"
               Visibility="{Binding MainListCommandsVisibility}"
               VerticalAlignment="Top"

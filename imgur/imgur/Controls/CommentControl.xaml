@@ -24,7 +24,7 @@
                 </TextBlock>
                 <Grid IsHitTestVisible="False" Margin="0,0,0,5">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="12" Text="{Binding author}" Foreground="#FF4E76C9"/>
+                        <TextBlock FontSize="12" Text="{Binding author}" Foreground="{StaticResource MaterialBlue}"/>
                         <Image Source="ms-appx:///Assets/ic_gallery_meta_points.png" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="10" Margin="10,0,0,0"/>
                         <TextBlock FontSize="12" Margin="5,0,0,0" Text="{Binding points}" Foreground="#FFCCCCCC"/>
                         <Image Source="ms-appx:///Assets/comment_meta_time.png" Margin="15,0,0,0" Height="10"/>

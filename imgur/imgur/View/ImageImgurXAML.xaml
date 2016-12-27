@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:Imgur.ViewModels"
+    xmlns:uwpControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     d:DesignHeight="700"
     d:DesignWidth="400" 
@@ -133,7 +134,7 @@
                                        FontSize="12"/>
                             <TextBlock x:Name="accountID" 
                                        Text="{Binding PostData.AccountUrl}"
-                                       Foreground="#FF6E7EE7" 
+                                       Foreground="{StaticResource MaterialBlue}" 
                                        
                                        Margin="5,0,0,0" 
                                        FontWeight="Medium" 
@@ -216,17 +217,21 @@
                                 <StackPanel Margin="-11,5,-11,5" BorderThickness="0" Background="#FF2E3035">
                                     <TextBlock Visibility="{Binding titleVisibility}" TextWrapping="Wrap" Text="{Binding title}" FontSize="16" Foreground="White" Margin="10,0,0,5"/>
                                     <Grid>
-                                        <Image 
+                                        <!--<Image 
                                             MaxWidth="50"
                                             Source="ms-appx:///Assets/ic_gallery_placeholder.png"
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
-                                        <ProgressBar Foreground="{StaticResource ImgurGreen}" IsIndeterminate="True" VerticalAlignment="Top"/>
-                                        <Image DoubleTapped="UpvoteDoubleTap" 
-                                               Holding="Image_Holding" 
-                                               RightTapped="Image_RightTapped"
-                                               Source="{Binding link}"
-                                               Visibility="{Binding IsGifReverse}">
+                                            VerticalAlignment="Center"/>-->
+                                        <!--<ProgressBar Foreground="{StaticResource ImgurGreen}" IsIndeterminate="True" VerticalAlignment="Top"/>-->
+                                        <uwpControls:ImageEx
+                                            Stretch="UniformToFill"
+                                            Foreground="{StaticResource ImgurGreen}"
+                                            PlaceholderSource="ms-appx:///Assets/ic_gallery_placeholder.png"
+                                            DoubleTapped="UpvoteDoubleTap" 
+                                            Holding="Image_Holding" 
+                                            RightTapped="Image_RightTapped"
+                                            Source="{Binding link}"
+                                            Visibility="{Binding IsGifReverse}">
                                             <FlyoutBase.AttachedFlyout>
                                                 <Flyout>
                                                     <Flyout.Content>
@@ -234,7 +239,7 @@
                                                     </Flyout.Content>
                                                 </Flyout>
                                             </FlyoutBase.AttachedFlyout>
-                                        </Image>
+                                        </uwpControls:ImageEx>
                                         <MediaElement DoubleTapped="UpvoteDoubleTap" 
                                                       Holding="MediaElement_Holding" 
                                                       Tag="{Binding mp4}"
@@ -295,11 +300,22 @@
                         <TextBlock TextWrapping="Wrap" Text="{Binding description}" FontSize="12" Foreground="White" Margin="5,10,0,0"/>
                     </StackPanel>-->
                 </StackPanel>
-                <Grid x:Name="commentBar" Height="60" Background="#FF2E3035" Padding="0,10">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0">
-                        <TextBlock Text="{Binding Comments.Count}" Foreground="White"/>
-                        <TextBlock Text="COMMENTS" Margin="10,0,0,0" Foreground="White"/>
-                    </StackPanel>
+                <Grid x:Name="commentBar" Height="40" Background="#FF2E3035" Padding="0">
+                    <TextBlock Foreground="White" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Run Text="{Binding Comments.Count}"/>
+                        <Run Text=" COMMENTS"/>
+                    </TextBlock>
+                    <Button Foreground="{StaticResource MaterialBlue}"
+                            BorderThickness="0"
+                            Padding="0" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Stretch"
+                            FontSize="12" Margin="0,0,10,0" Background="{x:Null}">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Glyph="" FontSize="12"/>
+                            <TextBlock Text="ADD COMMENT" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </Button>
                 </Grid>
                 <ListView 
                     ScrollViewer.VerticalScrollMode="Disabled" 
@@ -330,7 +346,7 @@
                     Command="{Binding DownloadCommentsCommand}" 
                     HorizontalAlignment="Stretch"
                     Background="{x:Null}"
-                    BorderBrush="{x:Null}" Foreground="#FF6E7EE7" HorizontalContentAlignment="Right" Padding="8,4,20,4"/>
+                    BorderBrush="{x:Null}" Foreground="{StaticResource MaterialBlue}" HorizontalContentAlignment="Right" Padding="8,4,20,4"/>
             </StackPanel>
         </ScrollViewer>
         <StackPanel x:Name="topPart" 

@@ -5,6 +5,7 @@
     xmlns:local="using:Imgur"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uwpControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
      DataContext="{Binding Source={StaticResource viewModelLocator}, Path=PostViewModel}">
     <Page.Transitions>
@@ -34,7 +35,12 @@
                 Margin="0,0,15,15"
                 Command="{Binding ShareCommand}">
             <Grid MinWidth="60" MinHeight="60">
-                <Ellipse Fill="#FF1BB76E"/>
+                <uwpControls:DropShadowPanel
+                    OffsetY="5.0"
+                    ShadowOpacity="0.4"
+                    BlurRadius="4.0">
+                    <Ellipse Fill="#FF1BB76E"/>
+                </uwpControls:DropShadowPanel>
                 <FontIcon  Glyph="" Foreground="White"/>
             </Grid>
         </Button>

@@ -45,6 +45,14 @@ namespace Imgur
             }
         }
 
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            foreach (var tab in ViewModelLocator.MainViewModel.Tabs)
+            {
+                tab.Num = 5;
+            }
+        }
+
         //protected async override void OnNavigatedTo(NavigationEventArgs e)
         //{
         //    string startURL = "https://api.imgur.com/oauth2/authorize?client_id="+API.Client_ID+"&response_type=token&state=login";

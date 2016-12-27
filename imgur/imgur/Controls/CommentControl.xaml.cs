@@ -47,6 +47,7 @@ namespace Imgur
         string link = "";
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            Loaded -= UserControl_Loaded;
             string cap = (DataContext as Comment).comment;
             foreach (string s in cap.Split(' '))
             {

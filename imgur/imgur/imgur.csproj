@@ -110,6 +110,7 @@
       <DependentUpon>TabHeaderFill.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\IPostsDataService.cs" />
     <Compile Include="Services\LocalPostDataService.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />

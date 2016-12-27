@@ -14,6 +14,7 @@
         <SolidColorBrush x:Key="WhiteColor" Color="White"/>
         <SolidColorBrush x:Key="GrayColor" Color="#FF747A84"/>
         <SolidColorBrush x:Key="ImgurGreen" Color="#FF85BF25"/>
+        <SolidColorBrush x:Key="MaterialBlue" Color="#FF7789FF"/>
     </Application.Resources>
 
 </Application>

@@ -98,7 +98,7 @@ namespace Imgur.ViewModels
                     ViewModelLocator.PostViewModel = new PostViewModel(this);
                     ViewModelLocator.MainViewModel.CurrentPage = new PostDetail();
                 }
-                PostDetailViewModels[SelectedPost].Load();
+                if (SelectedPost != null) PostDetailViewModels[SelectedPost].Load();
             }
         }
 

@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     DataContext="{Binding Source={StaticResource viewModelLocator}, Path=MainViewModel}" 
-    Background="#FF212124">
+    Background="#FF212124" SizeChanged="Page_SizeChanged">
     <Page.Transitions>
         <TransitionCollection>
             <ReorderThemeTransition />
@@ -237,7 +237,8 @@
 
         <Frame 
             Grid.Row="0"
-            Content="{Binding CurrentPage}"
+            Content="{Binding CurrentPage}" CacheSize="0"
+            
             >
         </Frame>
         <Grid Grid.Row="1"
@@ -258,8 +259,8 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <FontIcon Width="72"
-                                      Glyph="{Binding Icon}"/>
+                        <FontIcon Width="70"
+                                  Glyph="{Binding Icon}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

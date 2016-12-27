@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Imgur.Models;
@@ -10,6 +12,7 @@ using GalaSoft.MvvmLight.Command;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
+using Imgur.Annotations;
 using Imgur.View;
 
 namespace Imgur.ViewModels
@@ -210,11 +213,16 @@ namespace Imgur.ViewModels
 
 
     }
-    public class Tab
+    public class Tab: INotifyPropertyChanged
     {
         public string Title
         {
             get; set;
+        }
+        public int Num
+        {
+            get { return 5; }
+            set { OnPropertyChanged();}
         }
         public string Icon
         {
@@ -246,5 +254,12 @@ namespace Imgur.ViewModels
         }
 
         public Stack<Page> NavigationStack = new Stack<Page>();
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

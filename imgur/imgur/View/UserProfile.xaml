@@ -29,7 +29,7 @@
         <Slider x:Name="slider" Margin="0,100,0,0" VerticalAlignment="Top" Maximum="300" ValueChanged="Slider_ValueChanged" Visibility="Collapsed"/>
         <Grid Height="160" VerticalAlignment="Top">
             <Grid.Background>
-                <ImageBrush Stretch="UniformToFill" ImageSource="Assets/space_bg.png"/>
+                <ImageBrush Stretch="UniformToFill" ImageSource="ms-appx:///Assets/space_bg.png"/>
             </Grid.Background>
             <Button Background="{x:Null}" Padding="12,0" Height="60" Width="60" Click="Back_Click" VerticalAlignment="Top">
                 <SymbolIcon Foreground="White" Symbol="Back"/>
@@ -40,7 +40,7 @@
                     <Ellipse Stroke="White"/>
                     <TextBlock Text="{Binding first_capital}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="30" FontFamily="Segoe UI Light" FontWeight="Light"/>
                 </Grid>-->
-                <Image Source="Assets/ic_planet.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Margin="0,-5,0,0"/>
+                <Image Source="ms-appx:///Assets/ic_planet.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Margin="0,-5,0,0"/>
                 <TextBlock Text="{Binding url}" TextAlignment="Center" Foreground="White" Margin="0,10,0,0" FontWeight="Medium"/>
                 <TextBlock x:Name="repResume" Text="{Binding reputation_resume}" TextAlignment="Center" Foreground="White" Margin="0,10,0,0"/>
                 <TextBlock Text="{Binding created_at}" TextAlignment="Center" Foreground="White" Margin="0,10,0,0" FontSize="12"/>
@@ -48,15 +48,15 @@
         </Grid>
         <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled" ViewChanged="ScrollViewer_ViewChanged" Margin="0,60,0,0">
             <StackPanel>
-                <Grid x:Name="lowerPart" Height="500" Background="#FF303030" Margin="0,100,0,0">
-                    <Grid Height="40" Background="#FF1A1A1A" VerticalAlignment="Top"/>
+                <Grid x:Name="lowerPart" Height="500" Background="#FF212124" Margin="0,100,0,0">
+                    <Grid Height="40" Background="#FF2E3035" VerticalAlignment="Top"/>
                     <Pivot SelectionChanged="Pivot_SelectionChanged">
                         <PivotItem>
                             <PivotItem.Header>
                                 <controls:TabHeaderFill Label="POSTS" x:Name="tabh1" FillPercent="0"/>
                             </PivotItem.Header>
                             <Grid>
-                                <Image Source="Assets/pizzacat.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"/>
+                                <Image Source="ms-appx:///Assets/pizzacat.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"/>
                             </Grid>
                         </PivotItem>
                         <PivotItem>
@@ -69,7 +69,7 @@
                             </PivotItem.Header>
                             <Grid>
                                 <StackPanel x:Name="noComments" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="Assets/pizzacat.png" Width="200"/>
+                                    <Image Source="ms-appx:///Assets/pizzacat.png" Width="200"/>
                                     <TextBlock Text="No comments yet" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0"/>
                                 </StackPanel>
                                 <ListView x:Name="comments" Background="{x:Null}" SelectionMode="None">
@@ -99,7 +99,7 @@
                                 </controls:TabHeaderFill>
                             </PivotItem.Header>
                             <Grid>
-                                <Image Source="Assets/pizzacat.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"/>
+                                <Image Source="ms-appx:///Assets/pizzacat.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"/>
                             </Grid>
                         </PivotItem>
                     </Pivot>
