@@ -30,7 +30,11 @@
                         <Image Source="ms-appx:///Assets/comment_meta_time.png" Margin="15,0,0,0" Height="10"/>
                         <TextBlock FontSize="12" Text="{Binding shortDate}" Foreground="#FFCCCCCC" Margin="5,0,0,0"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding repliesVisibility}" HorizontalAlignment="Right" Margin="0,0,20,0">
+                    <StackPanel 
+                        Orientation="Horizontal" 
+                        Visibility="{Binding repliesVisibility}"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,10,0">
                         <FontIcon 
                             Glyph=""
                             Foreground="#FFCCCCCC" FontSize="12" Margin="0,0,5,0"/>
@@ -42,11 +46,59 @@
                             Text="{Binding repliesCount}" FontSize="12"/>
                     </StackPanel>
                 </Grid>
+                <Grid x:Name="selectedActions" 
+                      x:DeferLoadStrategy="Lazy"  Visibility="Collapsed" Height="50">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Left">
+                        <Button Width="80"
+                                Background="{x:Null}"
+                                Command="{Binding UpvoteCommand}" 
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Image Height="20" Source="ms-appx:///Assets/ic_vote_unfilled.png" />
+                        </Button>
+                        <Button Width="80" 
+                                Background="{x:Null}"
+                                Grid.Column="1"
+                                Command="{Binding DownvoteCommand}"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Image Height="20" Source="ms-appx:///Assets/ic_vote_unfilled.png" RenderTransformOrigin="0.5,0.5" >
+                                <Image.RenderTransform>
+                                    <CompositeTransform Rotation="180"/>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Button>
+                        <Button Content="Chat" 
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch"
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                Foreground="#FF8A8A8A" 
+                                FontSize="20" 
+                                Width="90"/>
+                        <Button Content="Reply" 
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch"
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                Foreground="#FF8A8A8A" 
+                                FontSize="20" 
+                                Width="90"/>
+                    </StackPanel>
+                    <Button HorizontalAlignment="Right" 
+                            VerticalAlignment="Stretch"
+                            Background="{x:Null}" 
+                            BorderBrush="{x:Null}" 
+                            Foreground="#FF8A8A8A" 
+                            FontSize="20" 
+                            Width="80" HorizontalContentAlignment="Right" Padding="8,4,10,4">
+                        <SymbolIcon Symbol="More"/>
+                    </Button>
+                </Grid>
             </StackPanel>
             <ListView 
                 ScrollViewer.VerticalScrollMode="Disabled" 
                 x:Name="replies" Visibility="Collapsed" 
-                Background="#33000000" ItemsSource="{Binding children}"
+                x:DeferLoadStrategy="Lazy" ItemsSource="{Binding children}"
                 Margin="10,0,0,0" SelectionMode="None" 
                 HorizontalContentAlignment="Stretch">
                 <ListView.ItemContainerTransitions>
@@ -68,3 +120,4 @@
         </StackPanel>
     </Grid>
 </UserControl>
+ 

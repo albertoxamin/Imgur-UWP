@@ -5,9 +5,11 @@
     xmlns:local="using:Imgur"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:Imgur.ViewModels"
     mc:Ignorable="d"
     d:DesignHeight="700"
-    d:DesignWidth="400" Loaded="UserControl_Loaded">
+    d:DesignWidth="400" 
+    d:DataContext="{d:DesignInstance viewModels:PostDetailViewModel}">
     <UserControl.Resources>
         <Storyboard x:Name="UpvoteAnimation">
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grid">
@@ -109,56 +111,94 @@
         </Storyboard>
     </UserControl.Resources>
 
-    <Grid Background="#FF212124" PointerEntered="Grid_PointerEntered">
+    <Grid Background="#FF212124">
         <ScrollViewer x:Name="scrollViewer" ViewChanged="scrollViewer_ViewChanged" Margin="0,0,0,0">
-            <StackPanel x:Name="scrollableArea" Margin="0,0,0,60" Background="#FF212124">
+            <StackPanel x:Name="scrollableArea" Margin="0,0,0,90" Background="#FF212124">
                 <StackPanel x:Name="post" Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0,0,0,5">
                     <StackPanel x:Name="topPartFull"  VerticalAlignment="Top" Margin="0" Padding="60,0" Background="#FF2E3035" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF1E1E1E" BorderThickness="0,0,0,1">
                         <StackPanel.RenderTransform>
                             <CompositeTransform x:Name="topPartTop" TranslateY="0"/>
                         </StackPanel.RenderTransform>
-                        <TextBlock TextWrapping="Wrap" Text="{Binding Title}" FontSize="15" Foreground="White" Margin="0,15,0,0" />
-                        <StackPanel Orientation="Horizontal" Height="20" Margin="0,5">
-                            <TextBlock Margin="0" Text="By" Foreground="#FF6C6C6C" FontSize="12"/>
-                            <TextBlock x:Name="accountID" Text="{Binding AccountUrl}" Foreground="#FF4E76C9" Tapped="accountID_Tapped" Margin="5,0,0,0" FontWeight="Medium" FontSize="12"/>
+                        <TextBlock TextWrapping="Wrap" 
+                                   Text="{Binding PostData.Title}"
+                                   FontSize="15" 
+                                   Foreground="White" 
+                                   Margin="0,15,0,0" />
+                        <StackPanel Orientation="Horizontal"
+                                    Height="20
+                                    " Margin="0,5">
+                            <TextBlock Margin="0"
+                                       Text="By"
+                                       Foreground="#FF6C6C6C"
+                                       FontSize="12"/>
+                            <TextBlock x:Name="accountID" 
+                                       Text="{Binding PostData.AccountUrl}"
+                                       Foreground="#FF6E7EE7" 
+                                       
+                                       Margin="5,0,0,0" 
+                                       FontWeight="Medium" 
+                                       FontSize="12"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="ms-appx:///Assets/upvote_meta.png" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="10" />
-                            <TextBlock Margin="5,0,0,0" Text="{Binding Upvotes}" Foreground="#FF6C6C6C" FontSize="12"/>
-                            <TextBlock Margin="5,0,0,0" Text="Points" Foreground="#FF6C6C6C" FontSize="12"/>
-                            <!--<Image Margin="15,0,0,0" Source="Assets/ic_gallery_meta_comments.png" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="10"/>
-                <TextBlock Margin="5,0,0,0" Text="{Binding CommCount}" Foreground="White"/>
-                <Image Visibility="{Binding AlbumVisbility}" Source="Assets/ic_gallery_meta_album.png" Margin="15,0,0,0" Height="10"/>
-                <TextBlock Visibility="{Binding AlbumVisbility}" Text="{Binding images_count}" Foreground="White" Margin="5,0,0,0"/>-->
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                Foreground="#FF6C6C6C"
+                                FontSize="12">
+                                <Run Text="{Binding PostData.Upvotes}"/>
+                                <Run Text=" Points"/>
+                            </TextBlock>
                             <Image Source="ms-appx:///Assets/time_meta.png" Margin="15,0,0,0" Height="10"/>
-                            <TextBlock Text="{Binding shortDate}" Foreground="#FF6C6C6C" Margin="5,0,0,0" FontSize="12"/>
+                            <TextBlock Foreground="#FF6C6C6C" Margin="5,0,0,0" FontSize="12">
+                                <Run Text="{Binding PostData.Views}"/>
+                                <Run Text=" Views"/>
+                            </TextBlock>
+                            <Image Source="ms-appx:///Assets/time_meta.png" Margin="15,0,0,0" Height="10"/>
+                            <TextBlock Foreground="#FF6C6C6C" Margin="5,0,0,0" FontSize="12">
+                                <Run Text="{Binding PostData.shortDate}"/>
+                            </TextBlock>
                         </StackPanel>
                         <Grid HorizontalAlignment="Center" MinWidth="300">
-                            <Button Width="90" Height="60" Background="{x:Null}" Click="Upvote">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Height="60"
+                                    Background="{x:Null}"
+                                    Command="{Binding UpvoteCommand}" 
+                                    HorizontalAlignment="Stretch">
                                 <Image Height="20" Source="ms-appx:///Assets/ic_vote_unfilled.png" />
                             </Button>
-                            <Button Width="90" Height="60" Background="{x:Null}" HorizontalAlignment="Center" Click="Downvote">
+                            <Button Height="60" 
+                                    Background="{x:Null}"
+                                    Grid.Column="1"
+                                    Command="{Binding DownvoteCommand}"
+                                    HorizontalAlignment="Stretch">
                                 <Image Height="20" Source="ms-appx:///Assets/ic_vote_unfilled.png" RenderTransformOrigin="0.5,0.5" >
                                     <Image.RenderTransform>
                                         <CompositeTransform Rotation="180"/>
                                     </Image.RenderTransform>
                                 </Image>
                             </Button>
-                            <Button Width="90" Height="60" Background="{x:Null}" HorizontalAlignment="Right" Click="Favorite">
+                            <Button Height="60"
+                                    Background="{x:Null}" 
+                                    Grid.Column="2"
+                                    Command="{Binding FavoriteCommand}"
+                                    HorizontalAlignment="Stretch">
                                 <Image Height="20" Source="ms-appx:///Assets/ic_heart_unfilled.png" />
                             </Button>
                         </Grid>
                     </StackPanel>
                     <ListView 
                         x:Name="immaginiList"
-                        x:DeferLoadStrategy="Lazy"
+                        
                         Height="Auto"
                         ScrollViewer.VerticalScrollMode="Disabled"
-                        Tag="{Binding ID}"
-                        Visibility="{Binding AlbumVisbility}"
                         Background="#00000000"
-                        Loaded="immaginiList_Loaded"
-                        SelectionMode="None" HorizontalContentAlignment="Stretch">
+                        SelectionMode="None"
+                        HorizontalContentAlignment="Stretch"
+                        ItemsSource="{Binding PostImages}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -176,9 +216,17 @@
                                 <StackPanel Margin="-11,5,-11,5" BorderThickness="0" Background="#FF2E3035">
                                     <TextBlock Visibility="{Binding titleVisibility}" TextWrapping="Wrap" Text="{Binding title}" FontSize="16" Foreground="White" Margin="10,0,0,5"/>
                                     <Grid>
-                                        <Image MaxWidth="50" Source="ms-appx:///Assets/ic_gallery_placeholder.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Image 
+                                            MaxWidth="50"
+                                            Source="ms-appx:///Assets/ic_gallery_placeholder.png"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                         <ProgressBar Foreground="{StaticResource ImgurGreen}" IsIndeterminate="True" VerticalAlignment="Top"/>
-                                        <Image DoubleTapped="UpvoteDoubleTap" Holding="Image_Holding" RightTapped="Image_RightTapped" Source="{Binding link}" Visibility="{Binding IsGifReverse}">
+                                        <Image DoubleTapped="UpvoteDoubleTap" 
+                                               Holding="Image_Holding" 
+                                               RightTapped="Image_RightTapped"
+                                               Source="{Binding link}"
+                                               Visibility="{Binding IsGifReverse}">
                                             <FlyoutBase.AttachedFlyout>
                                                 <Flyout>
                                                     <Flyout.Content>
@@ -187,7 +235,13 @@
                                                 </Flyout>
                                             </FlyoutBase.AttachedFlyout>
                                         </Image>
-                                        <MediaElement DoubleTapped="UpvoteDoubleTap" Holding="MediaElement_Holding" Tag="{Binding mp4}" RightTapped="MediaElement_RightTapped" Visibility="{Binding IsGif}" Source="{Binding mp4}" IsLooping="{Binding looping}" >
+                                        <MediaElement DoubleTapped="UpvoteDoubleTap" 
+                                                      Holding="MediaElement_Holding" 
+                                                      Tag="{Binding mp4}"
+                                                      RightTapped="MediaElement_RightTapped"
+                                                      Visibility="{Binding IsGif}"
+                                                      Source="{Binding mp4}"
+                                                      IsLooping="True" >
                                             <MediaElement.TransportControls>
                                                 <MediaTransportControls IsCompact="True"/>
                                             </MediaElement.TransportControls>
@@ -212,8 +266,8 @@
                         </ListView.ItemTemplate>
 
                     </ListView>
-                    <StackPanel x:Name="immagini" Visibility="{Binding AlbumVisibilityReverse}" Padding="0" Margin="0,0,0,0">
-                        <!--<TextBlock Visibility="{Binding AlbumVisbility}" TextWrapping="Wrap" Text="{Binding Title}" FontSize="16" Foreground="White" Margin="10,10,0,0"/>-->
+                    <!--<StackPanel x:Name="immagini" Visibility="{Binding AlbumVisibilityReverse}" Padding="0" Margin="0,0,0,0">
+                        --><!--<TextBlock Visibility="{Binding AlbumVisbility}" TextWrapping="Wrap" Text="{Binding Title}" FontSize="16" Foreground="White" Margin="10,10,0,0"/>--><!--
                         <Grid>
                             <Image MaxWidth="50" Source="ms-appx:///Assets/ic_gallery_placeholder.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <Image DoubleTapped="UpvoteDoubleTap" Holding="Image_Holding" RightTapped="Image_RightTapped" Source="{Binding link}" Visibility="{Binding IsGifReverse}">
@@ -239,20 +293,21 @@
                             </MediaElement>
                         </Grid>
                         <TextBlock TextWrapping="Wrap" Text="{Binding description}" FontSize="12" Foreground="White" Margin="5,10,0,0"/>
-                    </StackPanel>
+                    </StackPanel>-->
                 </StackPanel>
                 <Grid x:Name="commentBar" Height="60" Background="#FF2E3035" Padding="0,10">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0">
-                        <TextBlock Text="{Binding CommCount}" Foreground="White"/>
+                        <TextBlock Text="{Binding Comments.Count}" Foreground="White"/>
                         <TextBlock Text="COMMENTS" Margin="10,0,0,0" Foreground="White"/>
                     </StackPanel>
                 </Grid>
                 <ListView 
                     ScrollViewer.VerticalScrollMode="Disabled" 
                     x:Name="commenti"
-                    ItemsSource="{Binding comment_preview}"
+                    ItemsSource="{Binding LoadedComments}"
                     Background="{x:Null}" 
-                    SelectionMode="None" HorizontalContentAlignment="Stretch">
+                    SelectionMode="None" 
+                    HorizontalContentAlignment="Stretch">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -270,6 +325,12 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Button
+                    Content="SEE ALL COMMENTS"
+                    Command="{Binding DownloadCommentsCommand}" 
+                    HorizontalAlignment="Stretch"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}" Foreground="#FF6E7EE7" HorizontalContentAlignment="Right" Padding="8,4,20,4"/>
             </StackPanel>
         </ScrollViewer>
         <StackPanel x:Name="topPart" 
@@ -304,12 +365,25 @@
             <FontIcon IsHitTestVisible="False" Foreground="White" Glyph="&#xE010;"/>
         </Grid>
         <Grid x:Name="grid" Visibility="Collapsed" Background="#66000000">
-            <Image x:Name="Assets_BigMiddleSize_Stroke_16px_png" Margin="0" Source="ms-appx:///Assets/BigMiddleSize_Stroke_16px.png" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" RenderTransformOrigin="0.5,0.5">
+            <Image x:Name="Assets_BigMiddleSize_Stroke_16px_png"
+                   Margin="0"
+                   Source="ms-appx:///Assets/BigMiddleSize_Stroke_16px.png" 
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Width="200"
+                   RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <CompositeTransform/>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="Assets_ic_vote_filled___Copia_png" HorizontalAlignment="Center" Height="76" Source="ms-appx:///Assets/ic_vote_filled - Copia.png" Stretch="Fill" VerticalAlignment="Center" Width="76" RenderTransformOrigin="0.5,0.5">
+            <Image x:Name="Assets_ic_vote_filled___Copia_png"
+                   HorizontalAlignment="Center"
+                   Height="76"
+                   Source="ms-appx:///Assets/ic_vote_filled - Copia.png"
+                   Stretch="Fill"
+                   VerticalAlignment="Center"
+                   Width="76"
+                   RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <CompositeTransform/>
                 </Image.RenderTransform>

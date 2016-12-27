@@ -96,6 +96,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\SizeConverter.cs" />
     <Compile Include="Helpers\VisualTreeHelperExtensions.cs" />
     <Compile Include="ImgurAPI\API.cs" />
@@ -111,7 +112,9 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Services\IPostsDataService.cs" />
     <Compile Include="Services\LocalPostDataService.cs" />
+    <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\MainListViewModel.cs" />
+    <Compile Include="ViewModels\PostDetailViewModel.cs" />
     <Compile Include="ViewModels\PostViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="View\ChatsView.xaml.cs">

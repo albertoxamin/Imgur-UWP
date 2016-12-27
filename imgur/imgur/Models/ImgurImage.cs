@@ -354,9 +354,9 @@ namespace Imgur.Models
             get
             {
                 if (children != null)
-                    return children.Count + " " + ((children.Count == 1)? "reply": "replies");
-                else
-                    return "";
+                    if (children.Count != 0)
+                        return children.Count + " " + ((children.Count == 1)? "reply": "replies");
+                return "";
             }
         }
         public Visibility repliesVisibility

@@ -54,25 +54,7 @@ namespace Imgur.ViewModels
             }
         }
 
-        //#region Sharing
-        //private RelayCommand _shareCommand;
-        //public RelayCommand ShareCommand => _shareCommand ?? (_shareCommand = new RelayCommand(ExecuteShareCommand));
-
-        //private void ExecuteShareCommand()
-        //{
-        //    DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
-        //    dataTransferManager.DataRequested += DataTransferManager_DataRequested;
-        //    DataTransferManager.ShowShareUI();
-        //}
-
-        //private void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
-        //{
-        //    DataRequest request = args.Request;
-        //    request.Data.Properties.Title = "Share post";
-        //    request.Data.Properties.Description = "You are going to share this post";
-        //    request.Data.SetText("Hello world!");
-        //}
-        //#endregion
+        
 
         //private Thickness _pageMargin;
 

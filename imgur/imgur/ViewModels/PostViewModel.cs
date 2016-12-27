@@ -38,21 +38,6 @@ namespace Imgur.ViewModels
             ShareCommand = new RelayCommand(ExecuteShareCommand);
         }
 
-        private ObservableCollection<ImgurImage> _posts;
-
-        public ObservableCollection<ImgurImage> Posts
-        {
-            get
-            {
-                return _posts;
-            }
-            set
-            {
-                _posts = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public ImgurImage SelectedPost
         {
             get
@@ -66,9 +51,12 @@ namespace Imgur.ViewModels
         private void ExecuteBackCommand()
         {
             ViewModelLocator.MainViewModel.NavigateBack();
+            MainListViewModel.SharedInstance.PostDetailViewModels[SelectedPost].Unload();
         }
 
         public RelayCommand ShareCommand { get; private set; }
+
+       
 
         private void ExecuteShareCommand()
         {

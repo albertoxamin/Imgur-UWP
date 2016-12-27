@@ -20,7 +20,8 @@
 **/[Bb]uild/
 bld/
 **/[Bb]in/
-imgur/[Oo]bj/
+imgur/obj/
+imgur/imgur/obj/
 
 # Visual Studio 2015 cache/options directory
 .vs/

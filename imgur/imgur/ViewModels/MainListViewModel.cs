@@ -10,7 +10,10 @@ namespace Imgur.ViewModels
 {
     public class MainListViewModel : ViewModelBase
     {
+        public static MainListViewModel SharedInstance;
         public List<SortType> SortTypes { get; set; }
+        public Dictionary<ImgurImage, PostDetailViewModel> PostDetailViewModels;
+
         private SortType _currentSort;
 
         public SortType CurrenSort
@@ -18,14 +21,18 @@ namespace Imgur.ViewModels
             get { return _currentSort; }
             set
             {
-                _currentSort = value;
-                RaisePropertyChanged();
-                LoadData();
+                if (value != CurrenSort)
+                {
+                    _currentSort = value;
+                    RaisePropertyChanged();
+                    LoadData();
+                }
             }
         }
 
         public MainListViewModel()
         {
+            SharedInstance = this;
             Posts = new ObservableCollection<ImgurImage>();
             SortTypes = new List<SortType>();
             SortTypes.Add(new SortType() {Value = (int)ImgurGallerySort.Viral, Name = "Popular"});
@@ -50,6 +57,11 @@ namespace Imgur.ViewModels
             Posts = new ObservableCollection<ImgurImage>(data);
             if (ViewModelLocator.MainViewModel != null)
                 ViewModelLocator.MainViewModel.IsBusy = false;
+            PostDetailViewModels = new Dictionary<ImgurImage, PostDetailViewModel>();
+            foreach (var image in Posts)
+            {
+                PostDetailViewModels[image] = new PostDetailViewModel(image);
+            }
             await Task.Delay(200);
             isSelectionChangedCooledDown = false;
         }
@@ -86,6 +98,7 @@ namespace Imgur.ViewModels
                     ViewModelLocator.PostViewModel = new PostViewModel(this);
                     ViewModelLocator.MainViewModel.CurrentPage = new PostDetail();
                 }
+                PostDetailViewModels[SelectedPost].Load();
             }
         }
 

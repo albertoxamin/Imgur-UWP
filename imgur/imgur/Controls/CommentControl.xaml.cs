@@ -30,11 +30,13 @@ namespace Imgur
 
         private void ShowReplies(object sender, PointerRoutedEventArgs e)
         {
+            this.FindName("replies");
+            this.FindName("selectedActions");
             if (replies.Visibility == Visibility.Collapsed)
                 replies.Visibility = Visibility.Visible;
             else
                 replies.Visibility = Visibility.Collapsed;
-
+            selectedActions.Visibility = replies.Visibility;
             string stringContainingLinks = (DataContext as Comment).comment;
             foreach (Comment c in (DataContext as Comment).children)
             {
